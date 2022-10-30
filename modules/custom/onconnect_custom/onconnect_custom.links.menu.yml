@@ -1,0 +1,14 @@
+onconnect_custom:
+  route_name: onconnect_custom.global
+  title: 'Onconnect'
+  parent: system.admin_config
+
+onconnect_custom.global_settings:
+  route_name: onconnect_custom.global_settings
+  title: 'Global Settings'
+  parent: onconnect_custom
+
+onconnect_custom.metrics_dashboard:
+  route_name: onconnect_custom.metrics_dashboard
+  title: 'Metrics Data'
+  parent: onconnect_custom

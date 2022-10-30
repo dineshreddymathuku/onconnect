@@ -1,0 +1,34 @@
+onconnect_top_banner.banner_config:
+  title: 'Default Banner configuration'
+  route_name: onconnect_top_banner.admin_settings_form
+  description: 'Default Banner config'
+  parent: onconnect_custom
+  weight: 0
+
+onconnect_top_banner.admin_settings_form:
+  title: 'Home Banner'
+  route_name: onconnect_top_banner.admin_settings_form
+  description: 'Home Banner configuration'
+  parent: onconnect_top_banner.banner_config
+  weight: 0
+
+onconnect_top_banner.disease_areas_form:
+  title: 'Disease Areas Banner'
+  route_name: onconnect_top_banner.disease_areas_form
+  description: 'Disease Areas Banner configuration'
+  parent: onconnect_top_banner.banner_config
+  weight: 1
+
+onconnect_top_banner.congresses_form:
+  title: 'Congresses Banner'
+  route_name: onconnect_top_banner.congresses_form
+  description: 'Congresses Banner configuration'
+  parent: onconnect_top_banner.banner_config
+  weight: 2
+
+onconnect_top_banner.scientific_platform_form:
+  title: 'Scientific Platform Banner'
+  route_name: onconnect_top_banner.scientific_platform_form
+  description: 'Scientific Platform Banner configuration'
+  parent: onconnect_top_banner.banner_config
+  weight: 3

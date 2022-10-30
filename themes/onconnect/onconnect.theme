@@ -1,0 +1,801 @@
+<?php
+
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Implements theme_preprocess_block().
+ */
+function onconnect_preprocess_block(&$variables) {
+  // Remove page title block on 'onconnect_article' content type.
+  if ($variables['elements']['#id'] == 'onconnect_page_title') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node && $node->getType() == 'onconnect_article') {
+      $variables['content'] = [];
+    }
+  }
+  // Bibliography page title update.
+  if ($variables['elements']['#id'] == 'pagetitle') {
+    $current_url = Url::fromRoute('<current>');
+    $url = $current_url->getInternalPath();
+    if ($url == 'my/bibliograpy') {
+      $variables['content'] = ['#markup' => '<h2 class="welcome-msg"> My Bibliography </h2>'];
+    }
+  }
+
+  if ($variables['elements']['#id'] == 'views_block__featured_news_block_2') {
+    foreach ($variables['content']['#view']->result as $row) {
+      $mid = $row->_entity->get('field_featured_image')->target_id;
+      $media = Media::load($mid);
+      if ($media) {
+        $fid = $media->field_media_image->target_id;
+        $file = File::load($fid);
+        if ($file) {
+          $variables['featured_image_url'] = $file->uri->value;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements theme_preprocess_hook().
+ */
+function onconnect_preprocess_node__static_detail_page(&$variables) {
+  $authors = $variables['node']->get("field_author")->getValue();
+  $authorsData = [];
+  if ($authors) {
+    foreach ($authors as $author) {
+      $authorsData[] = $author['value'];
+    }
+  }
+  if ($authorsData) {
+    $variables['authors'] = implode(", ", $authorsData);
+  }
+  $attachments = $variables['node']->get("field_attachments")->getValue();
+  $attachmentsData = [];
+  if ($attachments) {
+    foreach ($attachments as $attachment) {
+      $attachmentLoad = Paragraph::load($attachment['target_id']);
+      if ($attachmentLoad) {
+        $type = $attachmentLoad->get("field_type")->value;
+        if ($type == "link") {
+          $uri = $attachmentLoad->get("field_resource_link")->uri;
+          $title = $attachmentLoad->get("field_resource_link")->title;
+          if (strpos($uri, 'internal:') !== FALSE || strpos($uri, 'entity:') !== FALSE) {
+            $url = Url::fromUri($uri)->toString();
+            $link = $url;
+          }
+          else {
+            $link = $uri;
+          }
+          $attachmentsData["links"][] = [
+            'url' => $link,
+            'title' => $title,
+          ];
+        }
+        if ($type == "file") {
+          $mediaID = $attachmentLoad->get("field_upload_file")->target_id;
+          if ($mediaID) {
+            $mediaLoad = Media::load($mediaID);
+            if ($mediaLoad) {
+              $fileID = $mediaLoad->get("field_media_file")->target_id;
+              $fileLoad = File::load($fileID);
+              if ($fileLoad) {
+                $attachmentsData["file"][] = [
+                  'url' => $fileID,
+                  'title' => $fileLoad->getFilename(),
+                  'fileSize' => format_bytes($fileLoad->getSize()),
+                  'type' => strtoupper(str_replace("application/", "", $fileLoad->getMimeType())),
+                ];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  $variables['attachments'] = $attachmentsData;
+}
+
+/**
+ * Implements to get Size in KB or MB.
+ */
+function format_bytes($bytes) {
+  if ($bytes > 0) {
+    $i = floor(log($bytes) / log(1024));
+    $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    return sprintf('%.02F', round($bytes / pow(1024, $i), 1)) * 1 . ' ' . @$sizes[$i];
+  }
+  else {
+    return 0;
+  }
+}
+
+/**
+ * Implements theme_preprocess_hook().
+ */
+function onconnect_preprocess_node__onconnect_article(&$variables) {
+  $authors = $variables['node']->get("field_author")->getValue();
+  $authorsData = [];
+  if ($authors) {
+    foreach ($authors as $author) {
+      $authorsData[] = $author['value'];
+    }
+  }
+  if ($authorsData) {
+    $variables['authors'] = implode(" ,", $authorsData);
+  }
+}
+
+/**
+ * Implements theme_preprocess_hook().
+ */
+function onconnect_preprocess_node__publication(&$variables) {
+
+  // Convert author names to comma separated.
+  // $authors = $variables['node']->get("field_author")->getValue();
+  // $authors = $variables['node']->get("field_docauthors")->getValue();
+  $authors = $variables['node']->get("field_doc_authors")->getValue();
+  $authorsData = [];
+  if ($authors) {
+    foreach ($authors as $author) {
+      $author_str = str_replace(';', ',', $author['value']);
+      // $authorsData[] = $author['value'];
+    }
+    $authorsData = explode(',', $author_str);
+  }
+  if ($authorsData) {
+    $variables['authorsFull'] = '';
+    $variables['authors'] = implode(", ", $authorsData);
+    if (strlen($variables['authors']) > 50) {
+      $countAuthors = count($authorsData);
+      $variables['authors'] = substr($variables['authors'], 0, 50) . "... <span style='cursor: pointer;' class='link authors-show-all'>Show all($countAuthors)</span>";
+      $variables['authorsFull'] = implode(", ", $authorsData) . " <span style='cursor: pointer;' class='link authors-show-less'>Show less</span>";
+    }
+  }
+  // $variables['description'] = strip_tags($variables['node']->get("body")->value);
+  $variables['description'] = strip_tags($variables['node']->get("field_title_text")->value);
+
+  if (strlen($variables['description']) > 120) {
+    $variables['description_trim'] = substr($variables['description'], 0, 120);
+
+    $variables['description_trim'] = $variables['description_trim'] . "..  <span style='cursor: pointer;' class='link description-show-more'>Show more</span>";
+
+  }
+  else {
+
+    $variables['description_trim'] = $variables['description'];
+  }
+
+  $resourceLink = $variables['node']->get("field_resource_link")->uri;
+  if (strpos($resourceLink, 'internal:') !== FALSE || strpos($resourceLink, 'entity:') !== FALSE) {
+    $resourceLinkurl = Url::fromUri($resourceLink)->toString();
+    $resourceLinkurllink = $resourceLinkurl;
+  }
+  else {
+    $resourceLinkurllink = $resourceLink;
+  }
+  if (!$resourceLinkurllink) {
+    $fileUpload = $variables['node']->get("field_upload_file")->target_id;
+    $fileLoad = File::load($fileUpload);
+    if($fileLoad){
+      $resourceLink = $fileLoad->getFileUri();
+      $resourceLinkurllink = $resourceLink;
+    }
+    
+  }
+  $variables['resourceLink'] = $resourceLinkurllink;
+  $variables['nodeID'] = $variables['node']->id();
+  $attachments = $variables['node']->get("field_attachments")->getValue();
+  $attachmentsData = [];
+  if ($attachments) {
+    foreach ($attachments as $attachment) {
+      $attachmentLoad = Paragraph::load($attachment['target_id']);
+      if ($attachmentLoad) {
+        $type = $attachmentLoad->get("field_type")->value;
+        if ($type == "link") {
+          $uri = $attachmentLoad->get("field_resource_link")->uri;
+          $title = $attachmentLoad->get("field_resource_link")->title;
+          if (strlen($title) > 50) {
+            $title = substr($title, 0, 50) . '...';
+          }
+          if (strpos($uri, 'internal:') !== FALSE || strpos($uri, 'entity:') !== FALSE) {
+            $url = Url::fromUri($uri)->toString();
+            $link = $url;
+          }
+          else {
+            $link = $uri;
+          }
+          $attachmentsData["links"][] = [
+            'url' => $link,
+            'title' => $title,
+          ];
+        }
+        if ($type == "file") {
+          $mediaID = $attachmentLoad->get("field_upload_file")->target_id;
+          if ($mediaID) {
+            $mediaLoad = Media::load($mediaID);
+            if ($mediaLoad) {
+              $fileID = $mediaLoad->get("field_media_file")->target_id;
+              $fileLoad = File::load($fileID);
+              if ($fileLoad) {
+                $attachmentsData["file"][] = [
+                  'url' => $fileID,
+                  'fileUrl' => $fileLoad->createFileUrl(),
+                  'title' => $fileLoad->getFilename(),
+                  'fileSize' => format_bytes($fileLoad->getSize()),
+                  'type' => strtoupper(str_replace("application/", "", $fileLoad->getMimeType())),
+                ];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  $variables['attachments'] = $attachmentsData;
+  // Convert study names to comma separated.
+  /*$field_study_name = $variables['node']->get("field_study_name")->getValue();
+  $study_namesData = [];
+  if ($field_study_name) {
+  foreach ($field_study_name as $study_name) {
+  $study_namesData[] = $study_name['value'];
+  }
+  }
+  $variables['study_names'] = implode(", ", $study_namesData);
+  // Convert study numbers to comma separated.
+  $field_study_numbers = $variables['node']->get("field_study_numbers")
+  ->getValue();
+  $study_numbersData = [];
+  if ($field_study_numbers) {
+  foreach ($field_study_numbers as $field_study_number) {
+  $study_numbersData[] = $field_study_number['value'];
+  }
+  }
+  $variables['studyNumbers'] = implode(", ", $study_numbersData);
+  if ($study_numbersData) {
+  $variables['studyNumbersFull'] = '';
+  $variables['studyNumbers'] = implode(", ", $study_numbersData);
+  if (strlen($variables['studyNumbers']) > 50) {
+  $countStudyNumbers = count($study_numbersData);
+  $variables['studyNumbers'] = substr($variables['studyNumbers'], 0, 50) . "... <span style='cursor: pointer;' class='link study-show-all'>Show all($countStudyNumbers)</span>";
+  $variables['studyNumbersFull'] = implode(", ", $study_numbersData) . " <span style='cursor: pointer;' class='link study-show-less'>Show less</span>";
+  }
+}*/
+  $variables['bibliographyCheck'] = check_bibliograpy($variables['node']->id());
+  $fileID = $variables['node']->get("field_upload_file")->target_id;
+  $variables['thumbnailAttachment'] = $variables['node']->get("field_file_thumbnail")->target_id;
+  $fileLoad = File::load($fileID);
+  if ($fileLoad) {
+    $type = '';
+    $fileType = $fileLoad->getMimeType();
+    if (strpos($fileType, '.document') !== FALSE) {
+      $type = "DOC";
+    }
+    if (strpos($fileType, '.presentation') !== FALSE) {
+      $type = "PPT";
+    }
+    $variables["fileData"] = [
+      'fid' => $fileID,
+      'title' => $fileLoad->getFilename(),
+      'fileSize' => format_bytes($fileLoad->getSize()),
+      'type' => $type ?: strtoupper(str_replace("application/", "", $fileLoad->getMimeType())),
+    ];
+  }
+  // Related publications.
+  /* $relatedPublications = $variables['node']->get("field_related_publications")
+  ->getValue();
+  $relatedPublicationsData = [];
+  if ($relatedPublications) {
+  foreach ($relatedPublications as $relatedPublication) {
+  $relatedPublicationLoad = Node::load($relatedPublication['target_id']);
+  if ($relatedPublicationLoad) {
+  $relatedPublicationsData[] = [
+  'alias' => \Drupal::service('path_alias.manager')
+  ->getAliasByPath('/node/' . $relatedPublication['target_id']),
+  'title' => $relatedPublicationLoad->label(),
+  'fid' => $relatedPublicationLoad->get("field_file_thumbnail")->target_id,
+  ];
+  }
+  }
+  $variables['related_publications'] = $relatedPublicationsData;
+}*/
+  // $indication = '';
+  /*if ($variables['node']->get("field_related_disease_areas")->target_id) {
+
+  $terms = \Drupal::entityTypeManager()
+  ->getStorage('taxonomy_term')
+  ->loadByProperties([
+  'vid' => 'disease_areas',
+  'tid' => $variables['node']->get("field_related_disease_areas")->target_id,
+  ]);
+  foreach ($terms as $term) {
+  $parent_term_id = $term->parent->target_id;
+  if ($parent_term_id) {
+  $indication = '';
+  }
+  else {
+  $indication = $term->name->value;
+  }
+
+  }
+}*/
+  if ($variables['node']->get("field_related_disease_areas")
+    ->referencedEntities()) {
+
+    $terms = $variables['node']->get("field_related_disease_areas")
+      ->referencedEntities();
+    foreach ($terms as $term) {
+      $parent_term_id = $term->parent->target_id;
+      $child_terms = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadTree('disease_areas', $term->id(), 1);
+      if ($parent_term_id && !$child_terms) {
+
+        $product_count[] = $term->id();
+        if (count($product_count) > 1) {
+          $product .= ',' . $term->label();
+        }
+        else {
+          $product = $term->label();
+        }
+
+      }
+
+      if ($term->hasField('field_group_header')) {
+        if ($term->field_group_header->value) {
+          unset($term);
+        }
+        else {
+          // $term_children = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($term->id());
+          if ($child_terms) {
+            $indication = $term->label();
+
+          }
+        }
+      }
+      else {
+        // $term_children = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($term->id());
+        if ($child_terms) {
+          $indication = $term->label();
+
+        }
+      }
+
+    }
+
+  }
+
+  if ($variables['node']->get("field_related_to_congresses")
+    ->referencedEntities()) {
+    $congresses = $variables['node']->get("field_related_to_congresses")
+      ->referencedEntities();
+
+    foreach ($congresses as $congress) {
+      if ($congress->field_congress_abbr->value) {
+        $congress_abbr = $congress->field_congress_abbr->value;
+      }
+
+    }
+  }
+  if ($variables['node']->get("field_reference_citation")->value) {
+    $citation_info = $variables['node']->get("field_reference_citation")->value;
+  }
+
+  $variables['indication'] = $indication;
+  $variables['congress_abbr'] = $congress_abbr;
+  $variables['product'] = $product;
+  $variables['citation_info'] = $citation_info;
+  $variables['#cache'] = ['max-age' => 0];
+}
+
+/**
+ * Implements hook_preproces_hook().
+ */
+function onconnect_preprocess_page(&$variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->getType() == "static_detail_page") {
+      $variables['node_title'] = $node->label();
+    }
+  }
+  if (\Drupal::state()->get('top_banner_image')) {
+    $mid = \Drupal::state()->get('top_banner_image');
+    $file = File::load($mid);
+    if ($file) {
+      $path = $file->createFileUrl();
+    }
+    else {
+      $path = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/Home-banner.png";
+    }
+    $current_path = \Drupal::service('path.current')->getPath();
+    $patterns = "/user/login\n/user/*\n/home";
+    $match = \Drupal::service('path.matcher')
+      ->matchPath($current_path, $patterns);
+    if ($match) {
+      $variables['top_banner_image'] = $path;
+    }
+    else {
+      unset($variables['top_banner_image']);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function onconnect_theme_suggestions_page_alter(array &$suggestions, array $variables, $hook) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->getType() == "scientific_platform") {
+      $suggestions[] = 'page__node_scientific_platform';
+    }
+  }
+}
+
+/**
+ * Implements hook_preproces_hook().
+ */
+function onconnect_preprocess_node__scientific_platform(&$variables) {
+  $currentUser = \Drupal::currentUser();
+  $currentUserEmail = $currentUser->getEmail();
+  $node = $variables['node'];
+  $variables['pageAccess'] = FALSE;
+  $data = $node->get("field_data")->getValue();
+  $pdfURL = $node->get("field_platform_file")->uri;
+  $downloadableUrl = '';
+  global $base_url;
+  $mainPids = [];
+  if ($data) {
+    foreach ($data as $key => $mainPid) {
+      $mainPidLoad = Paragraph::load($mainPid['target_id']);
+      $fileLoad = File::load($mainPid['target_id']);
+      if ($mainPidLoad) {
+        $alias = \Drupal::service('path_alias.manager')
+          ->getAliasByPath('/node/' . $node->id());
+        $mainPids[$key]['title'] = $mainPidLoad->get("field_title")->value;
+        $mainPids[$key]['targetId'] = $mainPid['target_id'];
+        $mainPids[$key]['id'] = str_replace(" ", "-", $mainPidLoad->get("field_title")->value);
+        $mainPids[$key]['description'] = $mainPidLoad->get("field_description")->value;
+        $mainPids[$key]['show_share'] = $mainPidLoad->get("field_show_share_button")->value;
+        $mainPids[$key]['showUrl'] = $base_url . $alias . "#" . $mainPids[$key]['id'];
+        $mainPids[$key]['fileDownload'] = $mainPid['target_id'];
+        $mainPids[$key]['fileSize'] = ($fileLoad) ? format_bytes($fileLoad->getSize()) : 0;
+        $mainPids[$key]['file'] = $mainPidLoad->get("field_pdf_url")->uri ?: '';
+        $mainPids[$key]['note'] = $mainPidLoad->get("field_note")->value ?: '';
+        $mainPids[$key]['references'] = $mainPidLoad->get("field_references")->value ?: '';
+        $mainData = $mainPidLoad->get("field_data")->getValue();
+        if ($mainData) {
+          foreach ($mainData as $mainKey => $mainDataPid) {
+            $mainDataPidLoad = Paragraph::load($mainDataPid['target_id']);
+            $accordionData = $mainDataPidLoad->get("field_data")->getValue();
+            if ($accordionData) {
+              $accordionsPillar = [];
+              foreach ($accordionData as $accordionKey => $accordionDataPid) {
+                $accordionDataPidLoad = Paragraph::load($accordionDataPid['target_id']);
+                if ($accordionDataPidLoad) {
+                  $accordionsPillar[$accordionKey]['title'] = $accordionDataPidLoad->get("field_title_accordion")->value;
+                  $accordionsPillar[$accordionKey]['description'] = $accordionDataPidLoad->get("field_description")->value;
+                }
+              }
+            }
+            $mainPids[$key]['pillar'][$mainKey]['title'] = $mainDataPidLoad->get("field_title")->value;
+            $mainPids[$key]['pillar'][$mainKey]['data'] = $accordionsPillar;
+          }
+        }
+      }
+    }
+    $variables['accordions'] = $mainPids;
+    $variables['userEmail'] = $currentUserEmail;
+    $variables['nodeLabel'] = $node->label();
+  }
+}
+
+/**
+ * Implements hook_preproces_hook().
+ */
+function onconnect_preprocess_views_view_field__taxonomy_term__grid_block__nid(&$variables) {
+  $nid = (string) $variables['output'];
+  $node_load = Node::load($nid);
+  $updated = $node_load->get("field_updated")->value;
+  if ($updated) {
+    $nodeTimeLabel = "Updated";
+  }
+  else {
+    $nodeTimeLabel = "Published";
+  }
+  $alias = \Drupal::service('path_alias.manager')
+    ->getAliasByPath('/node/' . $nid);
+  $description_text = $node_load->get("body")->value;
+  $str = $description_text;
+  if (strlen($str) > 250) {
+    $description = explode("\n", wordwrap($str, 50));
+    $description_text = $description[0] . '...';
+  }
+  $updated_date = $node_load->get("changed")->value;
+  $checkUpdatedDate = strtotime("now") - 86400;
+  if ($checkUpdatedDate > $updated_date && $updated_date < strtotime('now')) {
+    $latest = FALSE;
+    $datePublished = t("$nodeTimeLabel @date", ["@date" => date("M d, Y", $updated_date)]);
+  }
+  else {
+    $latest = TRUE;
+    $datePublished = t("$nodeTimeLabel @date", [
+      "@date" => get_time_difference($updated_date),
+    ]);
+  }
+
+  $variables["publication"] = [
+    'publication_type' => $node_load->get("field_publication_type")->entity->label(),
+    'journal' => $node_load->get("field_publication_journal")->value,
+    'indication' => $node_load->get("field_publication_indication")->value,
+    'latest' => $latest,
+    'datePublished' => $datePublished,
+    'description' => $description_text,
+    'alias' => $alias,
+    'nid' => $nid,
+    'checkBibliograpy' => check_bibliograpy($nid),
+  ];
+}
+
+/**
+ * Implements hook_preproces_hook().
+ */
+function onconnect_preprocess_views_view_field__taxonomy_term__list_block__nid(&$variables) {
+  $nid = (string) $variables['output'];
+  $node_load = Node::load($nid);
+  $updated = $node_load->get("field_updated")->value;
+  if ($updated) {
+    $nodeTimeLabel = "Updated";
+  }
+  else {
+    $nodeTimeLabel = "Published";
+  }
+  $alias = \Drupal::service('path_alias.manager')
+    ->getAliasByPath('/node/' . $nid);
+  $description_text = $node_load->get("body")->value;
+  $str = $description_text;
+  if (strlen($str) > 250) {
+    $description = explode("\n", wordwrap($str, 50));
+    $description_text = $description[0] . '...';
+  }
+  $updated_date = $node_load->get("changed")->value;
+  $checkUpdatedDate = strtotime("now") - 86400;
+  if ($checkUpdatedDate > $updated_date && $updated_date < strtotime('now')) {
+    $latest = FALSE;
+    $datePublished = t("$nodeTimeLabel @date", ["@date" => date("M d, Y", $updated_date)]);
+  }
+  else {
+    $latest = TRUE;
+    $datePublished = t("$nodeTimeLabel @date", [
+      "@date" => get_time_difference($updated_date),
+    ]);
+  }
+  $variables["publication"] = [
+    'publication_type' => $node_load->get("field_publication_type")->entity->label(),
+    'journal' => $node_load->get("field_publication_journal")->value,
+    'indication' => $node_load->get("field_publication_indication")->value,
+    'latest' => $latest,
+    'datePublished' => $datePublished,
+    'description' => $description_text,
+    'alias' => $alias,
+    'nid' => $nid,
+    'checkBibliograpy' => check_bibliograpy($nid),
+  ];
+}
+
+/**
+ * Adding body classes for current node path.
+ */
+function onconnect_preprocess_html(&$vars) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $internal = \Drupal::service('path_alias.manager')
+    ->getAliasByPath($current_path);
+  $vars['attributes']['class'][] = str_replace("/", "", $internal);
+
+  $entity = _helper_get_route_entity();
+  $entity_type = $entity ? $entity->getEntityTypeId() : 'non-enitity';
+  $entity_type_bundle = $entity ? $entity->bundle() : 'non-enitity';
+
+  // Null on system pages.
+  $vars['var_entity_type'] = $entity_type;
+  // Null on system pages.
+  $vars['var_bundle'] = $entity_type;
+  $vars['attributes']['class'][] = $entity_type_bundle;
+  $vars['attributes']['class'][] = $entity_type;
+}
+
+/**
+ * Onconnect preprocess Function.
+ */
+function _helper_get_route_entity() {
+
+  $route_match = \Drupal::routeMatch();
+  // Entity will be found in the route parameters.
+  if (($route = $route_match->getRouteObject()) && ($parameters = $route->getOption('parameters'))) {
+    // Determine if the current route represents an entity.
+    foreach ($parameters as $name => $options) {
+      if (isset($options['type']) && strpos($options['type'], 'entity:') === 0) {
+        $entity = $route_match->getParameter($name);
+        if ($entity instanceof ContentEntityInterface && $entity->hasLinkTemplate('canonical')) {
+          return $entity;
+        }
+
+        // Since entity was found, no need to iterate further.
+        return NULL;
+      }
+    }
+  }
+}
+
+/**
+ * Onconnect preprocess Function.
+ */
+function onconnect_preprocess_region(&$variables) {
+  $variables['banner_url'] = FALSE;
+  $entityManager = \Drupal::entityTypeManager();
+  $entity = _helper_get_route_entity();
+  $entity_type = $entity ? $entity->getEntityTypeId() : 'non-enitity';
+  $entity_type_bundle = $entity ? $entity->bundle() : 'non-enitity';
+  if ($entity && $entity_type == 'taxonomy_term' && $entity_type_bundle == 'disease_areas' || $entity_type_bundle == 'congresses') {
+    $target_id = $entity->get('field_banner_image')->target_id;
+
+    if ($target_id) {
+      $bannerLoad = Media::load($target_id);
+      if ($bannerLoad) {
+        $mediaImage = $bannerLoad->get("field_media_image")->target_id;
+        $file = File::load($mediaImage);
+        if ($file) {
+          $path = $file->createFileUrl();
+          $variables['banner_url'] = $path;
+        }
+      }
+    }
+    else {
+      $parent_id = $entity->get('parent')->target_id;
+
+      if ($entity_type_bundle == 'disease_areas' && !$parent_id) {
+
+        if (\Drupal::state()->get('disease_area_landing_banner_image')) {
+          $mid = \Drupal::state()->get('disease_area_landing_banner_image');
+          $file = File::load($mid);
+          if ($file) {
+            $path = $file->createFileUrl();
+            $variables['banner_url'] = $path;
+          }
+          else {
+            $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/disease_area.png";
+
+          }
+        }
+      }
+      elseif ($entity_type_bundle == 'disease_areas' && $parent_id) {
+        $group_sub_child = $entityManager->getStorage('taxonomy_term')
+          ->loadTree('disease_areas', $entity->get('tid')->value, 1);
+
+        if ($group_sub_child) {
+
+          if (\Drupal::state()->get('disease_area_landing_banner_image')) {
+            $mid = \Drupal::state()->get('disease_area_landing_banner_image');
+            $file = File::load($mid);
+            if ($file) {
+              $path = $file->createFileUrl();
+              $variables['banner_url'] = $path;
+            }
+            else {
+              $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/disease_area.png";
+
+            }
+          }
+        }
+        else {
+          if (\Drupal::state()->get('asset_product_landing_banner_image')) {
+            $mid = \Drupal::state()->get('asset_product_landing_banner_image');
+            $file = File::load($mid);
+            if ($file) {
+              $path = $file->createFileUrl();
+              $variables['banner_url'] = $path;
+            }
+            else {
+              $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/product.png";
+            }
+          }
+        }
+        // dsm($entity->get('name')->value);.
+        /*  if (\Drupal::state()->get('asset_product_landing_banner_image')) {
+        $mid = \Drupal::state()->get('asset_product_landing_banner_image');
+        $file = File::load($mid);
+        if ($file) {
+        $path = $file->createFileUrl();
+        $variables['banner_url'] = $path;
+        }
+        else {
+        $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/product.png";
+        }
+      }*/
+      }
+      if ($entity_type_bundle == 'congresses' && !$parent_id) {
+        if (\Drupal::state()->get('congresses_landing_banner_image')) {
+          $mid = \Drupal::state()->get('congresses_landing_banner_image');
+          $file = File::load($mid);
+          if ($file) {
+            $path = $file->createFileUrl();
+            $variables['banner_url'] = $path;
+          }
+          else {
+            $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/congress.png";
+          }
+        }
+      }
+      elseif ($entity_type_bundle == 'congresses' && $parent_id) {
+        if (\Drupal::state()->get('congresses_sublanding_banner_image')) {
+          $mid = \Drupal::state()->get('congresses_sublanding_banner_image');
+          $file = File::load($mid);
+          if ($file) {
+            $path = $file->createFileUrl();
+            $variables['banner_url'] = $path;
+          }
+          else {
+            $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/congress.png";
+          }
+        }
+      }
+    }
+
+  }
+  if ($entity && $entity_type == 'node' && $entity_type_bundle == 'scientific_platform') {
+    $target_id = $entity->get('field_banner_image')->target_id;
+    if ($target_id) {
+      $file = File::load($target_id);
+      if ($file) {
+        $path = $file->createFileUrl();
+        $variables['banner_url'] = $path;
+      }
+      else {
+        $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/scientific_platform.png";
+      }
+    }
+    else {
+      if (\Drupal::state()->get('scientific_platform_banner_image')) {
+        $mid = \Drupal::state()->get('scientific_platform_banner_image');
+        $file = File::load($mid);
+        if ($file) {
+          $path = $file->createFileUrl();
+          $variables['banner_url'] = $path;
+        }
+        else {
+          $variables['banner_url'] = "/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/banner/scientific_platform.png";
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Onconnect hook_form_alter().
+ */
+function onconnect_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $view_ids = ['elastic_search_view'];
+
+  if ($form_id == 'views_exposed_form' && in_array($form_state->get('view')
+      ->id(), $view_ids)) {
+    // unset($form['search_api_fulltext']['#attributes']['placeholder']);.
+    $form['search_api_fulltext']['#attributes']['id'][] = 'onconnect-search';
+    $form['actions']['submit']['#attributes']['class'][] = 'onconnect-search-button';
+
+  }
+
+}

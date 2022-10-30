@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Banner module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function onconnect_top_banner_theme() {
+  return [
+    'top_banner' => [
+      'variables' => [
+        'message' => NULL,
+       // 'top_banner_image_path' =>NULL,
+      ],
+      'template' => 'block--topbanner',
+    ],
+  ];
+}

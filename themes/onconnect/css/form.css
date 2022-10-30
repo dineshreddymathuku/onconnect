@@ -1,0 +1,270 @@
+/* .publication_conceptform .region-content{
+    max-width: 70%;
+} */
+/* heading should be in h1 */
+.publication-conceptform{
+    max-width: 70%;
+    padding: 64px 112px;
+}
+.publication-conceptform h1{
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 150%;
+    letter-spacing: -1px;
+    font-feature-settings: 'salt' on;
+    color: #293033;
+    max-width:80%;
+}
+/* description styles as now done with custom class, once got the dynamic content update accordingly */
+.publication-conceptform .description{
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    font-feature-settings: 'salt' on;
+    color: #293033;
+}
+#block-publicationconceptsubmitform{
+    padding: 64px 112px 56px;
+    max-width: 55%;
+}
+.publication-submit-form-wrapper{
+    background: #fff;
+}
+.publication-submit-form-wrapper-inner{
+    max-width: 70%;
+    padding: 63px 112px;
+}
+.publication_conceptform .publication-form-label{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: rgba(41, 48, 51, 0.8);
+}
+.proposal-type legend{
+    display: none;
+}
+.proposal-type-radio .form__radio-button{
+    top: 4px;
+}
+.proposal-type-radio{
+    padding: 0;
+    margin: 0;
+}
+.publication_conceptform .form__radio-label{
+    padding-bottom: 10px;
+}
+.proposal-type-radio label{
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    font-feature-settings: 'salt' on;
+    color: #293033;
+    font-weight: normal;
+}
+.publication_conceptform .has-glyphicons .select-wrapper:after{
+    content: '' !important;
+}
+.select-wrapper:after {
+    color: rgba(41, 48, 51, 0.6);
+    content: '' !important;
+    font-weight: 400;
+    line-height: 0 !important;
+    margin-top: 0 !important;
+    padding-right: 0 !important;
+    position: absolute !important;
+    left: auto;
+    top: 41.67%;
+    right: 20px;
+    bottom: 37.5%;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.proposal-type-radio{
+    list-style-type: none;
+}
+.proposal-type{
+    padding-bottom: 30px;
+}
+.row-2{
+    padding-top: 45px;
+}
+.title-request, .form-description, .form-internal-author, .form-external-author, .form-comments, .attachments, .pfizer-owner{
+    padding-top: 40px;
+}
+.webform-submission-submit-publication-form-form input, .form-select{
+    border: 1px solid #29303399;
+}
+.webform-submission-submit-publication-form-form input:focus{
+    outline: 0 !important;
+}
+.form-control:focus{
+    border: 0 !important;
+    box-shadow: none;
+    border: 1px solid #29303399 !important;
+}
+.select-product, .select-indication{
+    padding-right: 32px;
+}
+.form-select, .webform-submission-submit-publication-form-form input{
+    height: 48px;
+    color: #293033;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+}
+.save-btn, .submit-btn, .cancel-btn{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+.save-btn button {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: #003FE2;
+    background: #fff;
+    border: 1px solid #003FE2;
+    padding: 16px;
+    border-radius: 6px;
+}
+.webform-submission-submit-publication-form-form .checkbox label, .webform-submission-submit-publication-form-form .radio label{
+    display: inline;
+    padding-left: 41px;
+}
+.webform-submission-submit-publication-form-form .checkbox input[type=checkbox]:checked, .webform-submission-submit-publication-form-form .checkbox-inline input[type=checkbox]:checked, .webform-submission-submit-publication-form-form .radio input[type=radio]:checked, .webform-submission-submit-publication-form-form .radio-inline input[type=radio]:checked{
+    background: #335BC3 !important;
+}
+.webform-submission-submit-publication-form-form .checkbox input[type=checkbox], .webform-submission-submit-publication-form-form .checkbox-inline input[type=checkbox], .webform-submission-submit-publication-form-form .radio input[type=radio], .webform-submission-submit-publication-form-form .radio-inline input[type=radio]{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display: block;
+    top: -3px;
+    margin-left: 10px;
+}
+.cancel-btn{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+    color: #003FE2;
+    border: 0;
+    background: #fff;
+    padding: 16px;
+    color: #003FE2;
+    margin-left: auto;
+}
+.submit-btn button{
+    color: #fff;
+    background: #003FE2;
+    border: 1px solid #003FE2;
+    padding: 16px;
+    width: 184px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+}
+.Disclaimer-text{
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: #293033;
+    padding: 24px 0 50px;
+}
+.publication_conceptform .glyphicon{
+    display: none;
+}
+.publication_conceptform .btn-success:hover{
+    color: #003FE2 !important;
+    background-color: #fff !important;
+    border-color: #003FE2 !important;
+}
+.publication_conceptform .btn-default:hover{
+    color: #003FE2;
+    background-color: #fff;
+    border-color: #fff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #003FE2;
+    border-color: #003FE2;
+}
+.help-text{
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: rgba(41, 48, 51, 0.8);
+}
+.button-actions{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+/* contact form css */
+.formcontact .webform-submission-contact-add-form{
+    padding: 50px 112px;
+}
+.formcontact .form-item{
+    padding-bottom: 20px;
+}
+.formcontact .form-item input{
+    background: #fff;
+    box-shadow: 0px 0px 0px 1px rgb(63 89 115 / 8%), 0px 2px 1px rgb(63 89 115 / 14%), 0px 1px 3px rgb(63 89 115 / 25%);
+    border-radius: 6px;
+    padding: 14px 14px 19px;
+    display: block;
+    height: auto !important;
+    border: 0;
+    max-width: 50%;
+}
+.formcontact .form-item input:focus{
+    outline: 0;
+}
+.formcontact .webform-button--submit{
+    background: #003fe2 !important;
+    margin: 16px 0 19px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #fff;
+    border-radius: 8px;
+}
+@media (max-width: 1300px) {
+    .formcontact .webform-submission-contact-add-form{
+        padding: 50px 25px;
+    }
+    .publication-conceptform{
+        max-width: 100%;
+    }
+    .publication-submit-form-wrapper-inner{
+        max-width: 100%;
+    }
+}
+@media (max-width: 1023px) {
+    .publication-conceptform, .publication-submit-form-wrapper-inner{
+        padding: 50px 55px;
+    }
+    .select-product, .select-indication {
+        padding-right: 0;
+    }
+}
+@media (max-width: 767px) {
+    .cancel-btn{
+        margin-right: 40px;
+    }
+}

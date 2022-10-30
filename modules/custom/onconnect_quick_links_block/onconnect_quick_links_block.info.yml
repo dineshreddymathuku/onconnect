@@ -1,0 +1,5 @@
+name: Oncology Quick Links Blocks
+type: module
+description: 'Custom development for oncology landing page quick links in banner section.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

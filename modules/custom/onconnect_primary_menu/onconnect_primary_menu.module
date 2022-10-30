@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Primary menu module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function onconnect_primary_menu_theme() {
+  return [
+    'primary_menu' => [
+      'variables' => [
+        'menus' => NULL,
+      ],
+      'template' => 'primary_menu',
+    ],
+  ];
+}

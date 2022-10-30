@@ -1,0 +1,35 @@
+<h2 id="block-footer-6-menu">{{ menus.name }}</h2>
+
+{% if menus.name == 'Disease Areas' %}
+<ul class="menu menu--footer nav">
+    {% if menus.group_header %}
+        {% for groupId, groupData in menus.group_header %}
+		        {% if groupData.alias%}
+		             <span class="group-footer-name"><a href="{{ groupData.alias }}">{{ groupId }}</a> </span>
+		        {% else %}
+		            <span class="group-footer-name">{{ groupId }} </span>
+            {% endif  %}
+	{% for childId, childData in groupData.children %}
+	<li><a class="{{ childData.active }}" href="{{ childData.alias }}">{{ childData.name }}    </a>
+	</li>
+	{% endfor %}
+        {% endfor %}
+    {% endif %}
+        {% if menus.children %}
+            {% for childId, childData in menus.children %}
+                <li><a class="{{ childData.active }}" href="{{ childData.alias }}">{{ childData.name }}</a></li>
+            {% endfor %}
+        {% endif %}
+   
+</ul>
+
+{% else %}
+<ul class="menu menu--footer nav">
+  {% for childId, childData in menus.children %}
+    <li>
+      <a class="{{ childData.active }}" href="{{ childData.alias }}">{{ childData.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

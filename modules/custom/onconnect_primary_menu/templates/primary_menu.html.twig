@@ -1,0 +1,306 @@
+   {% if logged_in %}
+<div class="header-navigation">
+  <div id="mobile-hamburger" class="mobile-hamburger">
+      <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/mobile-hamburger.svg"
+           alt="mobile-menu">
+  </div>
+    <nav class="clearfix">
+    <ul class="clearfix header-menu">
+      {% for id, menu in menus %}
+        <li class="header-main-menu {{ menu.name|replace({' ':''}) }}"><a class="hover-menu-list">{{ menu.name }}</a>
+          {% if menu.children %}
+            <ul class="header-dropdown-menu row">
+              <li class="dropdown-left col-lg-3">
+			  
+                <ul class="left-menu">
+				    {% if menu.group_header %}
+            {% for groupId, groupData in menu.group_header %}
+		        {% if groupData.alias%}
+		        <li class="group-name"><a href="{{ groupData.alias }}">{{ groupId }}</a> </li>
+		          {% else %}
+		        <li class="group-name">{{ groupId }} </li>
+		        {% endif  %}
+              {% if groupData.children %}
+		            {% for childId, childData in groupData.children %}
+                    <li class="{{ childData.name }}">
+                      <a class="main-child latest-view-link " href="{{ childData.alias }}"
+                         data-latestTitle="{{ menu.name }} > {{ childData.name }}">{{ childData.name }}
+                         
+                        {% if childData.sub_child %}
+                          <span><img alt="right-angled-arrow-icon"
+                                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle_right_arrow.svg"/></span>
+                          <img class="blue-icon" alt="right-angled-arrow-icon"
+                               src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/menu-blue-icon.svg"/>
+                        {% endif %}
+                      </a>
+                      {% if childData.sub_child %}
+                        <ul>
+                          <li class="dropdown-right col-lg-9">
+                            {% for subChildId, subChildData in childData.sub_child %}
+                              <ul>
+                                <li class="sub-child-details">
+                                  <a class="latest-view-link" href="{{ subChildData.alias }}"
+                                     data-latestTitle="{{ childData.name }} > {{ subChildData.name }}"><span
+                                      class="sub-menu-title">{{ subChildData.name }}</span></a>
+                                  {% if subChildData.description %}
+								                  {% set description = subChildData.description|render|striptags %}
+                                    <p class="description">{{ description|length > 80 ? description|slice(0, 80)|raw ~ '..' : description|raw }}</p>
+                                  {% endif %}
+                                  {% if subChildData.node %}
+								 
+                                    <a class="sub-child-node"
+                                       href="{{ subChildData.node.alias }}">{{ subChildData.node.label }}</a>
+                                  {% endif %}
+                                </li>
+                              </ul>
+                            {% endfor %}
+                            <ul>
+                              {% if childData.view_all %}
+                                <li class="view-all"><a href="{{ childData.view_all }}">View all <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                              {% if childData.submit_publication %}
+                                <li class="submit-publication submit"><a target="_blank"
+                                                                         href="{{ childData.submit_publication }}">Submit
+                                    Publication Concept <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/submit-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                            </ul>
+                          </li>
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+		            {% endif %}
+		          {% endfor %}
+		        {% endif %}
+                  {% for childId, childData in menu.children %}
+                    <li>
+					
+                      <a class="main-child latest-view-link {{ childData.active }} " href="{{ childData.alias }}"
+                         data-latestTitle="{{ menu.name }} > {{ childData.name }}">{{ childData.name }}
+                        {% if childData.sub_child %}
+                          <span><img alt="right-angled-arrow-icon"
+                                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle_right_arrow.svg"/></span>
+                          <img class="blue-icon" alt="right-angled-arrow-icon"
+                               src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/menu-blue-icon.svg"/>
+                        {% endif %}
+                      </a>
+                      {% if childData.sub_child %}
+                        <ul>
+                          <li class="dropdown-right col-lg-9">
+                            {% for subChildId, subChildData in childData.sub_child %}
+                              <ul>
+                                <li class="sub-child-details">
+                                  <a class="latest-view-link" href="{{ subChildData.alias }}"
+                                     data-latestTitle="{{ childData.name }} > {{ subChildData.name }}"><span
+                                      class="sub-menu-title">{{ subChildData.name }}</span></a>
+                                  {% if subChildData.description %}
+								                  {% set description = subChildData.description|render|striptags %}
+                                    <p class="description">{{ description|length > 80 ? description|slice(0, 80)|raw ~ '..' : description|raw }}</p>
+                                  {% endif %}
+                                  {% if subChildData.node %}
+                                    <a class="sub-child-node"
+                                       href="{{ subChildData.node.alias }}">{{ subChildData.node.label }}</a>
+                                  {% endif %}
+                                </li>
+                              </ul>
+                            {% endfor %}
+                            <ul>
+                              {% if childData.view_all %}
+                                <li class="view-all"><a href="{{ childData.view_all }}">View all <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                              {% if childData.submit_publication %}
+                                <li class="submit-publication submit"><a target="_blank"
+                                                                         href="{{ childData.submit_publication }}">Submit
+                                    Publication Concept <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/submit-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                            </ul>
+                          </li>
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+{# mobile-menu #}
+<div id="mobile-popup" class="mobile-menu-popup">
+  <nav>
+    <ul class="mobile-menu">
+      <li class="mobile-primary-menu">
+        <ul>
+          <li class="mobile-user-data">
+            <span class="mobile-bookmark"><a href="/my/bibliograpy"><img alt="bookmark-icon"
+                                                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/bookmark-mobile.svg"/></a></span>
+            <span class="mobile-user-icon"><img alt="profile-icon"
+                                                src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/profile-mobile.svg"/></span>
+            <span class="mobile-user-name">
+               {% if node_title %}
+                 <span class="welcome-msg">{{ node_title }}</span>
+               {% endif %}
+              <img alt="drodown-icon"
+                   src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/triangle.svg"/>
+            </span>
+            <span class="mobile-close"><img alt="close-icon"src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/close.svg"/></span>
+          </li>
+          <form action="/searchpage" class="icon-2 mobile-searchbox">
+            <li class="mobile-search">
+              <input class="mobile-searchbox-input" name="search_api_fulltext" placeholder="Search" type="search"/>
+              <span class="mobile-search-icon"><img alt="search-icon" src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/search.svg"/></span>
+            </li>
+          </form>
+        </ul>
+      </li>
+      <li class="mobile-secondary-menu">
+        <ul class="header-mobile-menu">
+          {% for id, menu in menus %}
+            <li class="header-mobile-main-menu {{ menu.name|replace({' ':''}) }}" id="{{ menu.id }}">
+              <a class="hover-menu-list-mobile">{{ menu.name }}
+                <span><img alt="right-angled-arrow-icon"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle_right_arrow.svg"/></span>
+              </a>
+              {% if menu.children %}
+                <ul class="header-mobile-dropdown-menu row">
+                  <li class="dropdown-mobile-left col-lg-3">
+                    <ul>
+                      <li class="back-arrow"><img alt="back-icon"
+                                                  src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/back-arrow.svg"/><span>Back</span>
+                      </li>
+            {% if menu.group_header %}
+            {% for groupId, groupData in menu.group_header %}
+		        {% if groupData.alias%}
+		        <li class="group-name group-name-mobile"><a href="{{ groupData.alias }}">{{ groupId }}</a> </li>
+		          {% else %}
+		        <li class="group-name group-name-mobile">{{ groupId }} </li>
+		        {% endif  %}
+              {% if groupData.children %}
+		            {% for childId, childData in groupData.children %}
+                    <li class="hover-menu-list-mobile-second">
+                      <a class="mobile-secondary-menu-parent-diseaseareas main-child latest-view-link" href="{{ childData.alias }}"
+                         data-latestTitle="{{ menu.name }} > {{ childData.name }}">{{ childData.name }}
+                      </a>
+                      {% if childData.sub_child %}
+                          <span class="mobile-right-arrow-diseaseareas"><img alt="right-angled-arrow-icon"
+                                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle_right_arrow.svg"/></span>
+                      {% endif %}
+                      {% if childData.sub_child %}
+                        <ul class="diseaseareas-products">
+                          <li class="back-arrow-2"><img alt="back-icon"
+                                                            src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/back-arrow.svg"/><span>Back</span>
+                          </li>
+                          <li class="col-lg-9">
+                            {% for subChildId, subChildData in childData.sub_child %}
+                              <ul>
+                                <li class="sub-child-details">
+                                  <a class="latest-view-link" href="{{ subChildData.alias }}"
+                                     data-latestTitle="{{ childData.name }} > {{ subChildData.name }}"><span
+                                      class="sub-menu-title">{{ subChildData.name }}</span></a>
+                                  {% if subChildData.description %}
+								                  {% set description = subChildData.description|render|striptags %}
+                                    <p class="description">{{ description|length > 80 ? description|slice(0, 80)|raw ~ '..' : description|raw }}</p>
+                                  {% endif %}
+                                  {% if subChildData.node %}
+                                    <a class="sub-child-node"
+                                       href="{{ subChildData.node.alias }}">{{ subChildData.node.label }}</a>
+                                  {% endif %}
+                                </li>
+                              </ul>
+                            {% endfor %}
+                            <ul>
+                              {% if childData.view_all %}
+                                <li class="view-all view-all-mobile"><a href="{{ childData.view_all }}">View all <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                              {% if childData.submit_publication %}
+                                <li class="submit-publication submit-mobile submit"><a target="_blank"
+                                                                         href="{{ childData.submit_publication }}">Submit
+                                    Publication Concept <span><img
+                                        alt="right-angled-arrow-icon"
+                                        src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/submit-arrow.svg"/></span></a>
+                                </li>
+                              {% endif %}
+                            </ul>
+                          </li>
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+		            {% endif %}
+		          {% endfor %}
+		        {% endif %}
+                      {% for childId, childData in menu.children %}
+                        {% if loop.first %}
+                          <li class="mobile-main-parent {{ childData.name }}">
+                        {% else %}
+                          <li class="mobile-main-parent {{ childData.name }}">
+                        {% endif %}
+                        <a class="mobile-secondary-menu-parent" href="{{ childData.alias }}">{{ childData.name }}</a>
+                        {% if childData.sub_child %}
+                          <span class="mobile-right-arrow"><img alt="right-angled-arrow-icon"
+                                                                src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle_right_arrow.svg"/></span>
+                        {% endif %}
+                        {% if childData.sub_child %}
+                          <ul class="mobile-sub-child">
+                            <li class="back-arrow-2"><img alt="back-icon"
+                                                          src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/back-arrow.svg"/><span>Back</span>
+                            </li>
+                            {% for subChildId, subChildData in childData.sub_child %}
+                              <li>
+                                <a href="{{ subChildData.alias }}"><span
+                                    class="mobile-sub-menu-title">{{ subChildData.name }}</span></a>
+                                {% if subChildData.node %}
+                                  <a class="mobile-sub-child-node"
+                                     href="{{ subChildData.node.alias }}">{{ subChildData.node.label }}</a>
+                                {% endif %}
+                              </li>
+                            {% endfor %}
+                            {% if childData.view_all %}
+                              <li class="view-all-mobile"><a href="{{ childData.view_all }}">View all <span
+                                    class="clearfix"><img
+                                      alt="right-angled-arrow-icon"
+                                      src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-arrow.svg"/></span></a>
+                              </li>
+                            {% endif %}
+                            {% if childData.submit_publication %}
+                              <li class="submit-publication submit-mobile"><a target="_blank"
+                                                                              href="{{ childData.submit_publication }}">Submit
+                                  Publication Concept <span><img
+                                      alt="right-angled-arrow-icon"
+                                      src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/submit-arrow.svg"/></span></a>
+                              </li>
+                            {% endif %}
+                          </ul>
+                        {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
+{% endif %}

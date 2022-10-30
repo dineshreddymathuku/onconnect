@@ -1,0 +1,19 @@
+onconnect_import.import_metrics:
+  route_name: onconnect_import.import_metrics
+  title: 'Metrics'
+  base_route: onconnect_import.import_data
+
+onconnect_import.import_data:
+  route_name: onconnect_import.import_data
+  title: 'Publications'
+  base_route: onconnect_import.import_data
+
+onconnect_import.publich_nodes:
+  route_name: onconnect_import.publich_nodes
+  title: 'Publish Nodes'
+  base_route: onconnect_import.import_data
+
+onconnect_import.delete_nodes:
+  route_name: onconnect_import.delete_nodes
+  title: 'Delete Publication Nodes'
+  base_route: onconnect_import.import_data

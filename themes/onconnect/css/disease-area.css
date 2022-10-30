@@ -1,0 +1,705 @@
+/* disease area landing pages header styles */
+/* prostrate cancer-landing page banner image styles */
+.taxonomy_term .region-top-banner {
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    padding: 0 112px;
+    height: 600px;
+}
+
+.taxonomy_term .top-banner-block {
+    padding: 0;
+}
+
+.disease_areas .header-wrapper,
+.congresses .header-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+}
+
+.path-taxonomy #top-banner {
+    padding: 0;
+}
+
+.path-taxonomy .top-banner-header {
+    padding: 0 !important;
+    width: unset;
+}
+
+.path-taxonomy .header-primary-menu {
+    position: absolute;
+    padding-top: 30px;
+    z-index: 1;
+    width: 2000px;
+}
+
+.path-taxonomy .top-banner-block img {
+    width: 2000px;
+    min-height: 400px;
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.path-taxonomy .head {
+    padding: 112px 0 0;
+    color: var(--color-white);
+    color: #fff;
+}
+
+#block-diseaseareasquicklinks {
+    padding-top: 100px;
+}
+
+#block-diseaseareas {
+    width: 100%;
+}
+
+.path-taxonomy .head-internal {
+    padding-top: 100px;
+}
+
+.path-taxonomy .bookmark {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.path-taxonomy .title {
+    margin: 0;
+    padding: 24px 0 20px;
+    font-size: var(--heading-h2-fontsize);
+    font-size: 48px;
+    line-height: 130%;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.path-taxonomy .description {
+    margin: 0;
+    /* max-width: 100%; */
+    font-size: var(--body-2-fontsize);
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 0.2px;
+}
+
+/* accordion styles */
+.path-taxonomy .quick-links {
+    width: 280px;
+    max-width: 100%;
+    background: var(--color-white);
+    background: #fff;
+    color: #293033;
+    box-shadow: 0px 0px 2px rgba(63, 89, 115, 0.08), 0px 2.5px 8px rgba(63, 89, 115, 0.2);
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0px 0px 2px rgba(63, 89, 115, 0.08), 0px 2.5px 8px rgba(63, 89, 115, 0.2);
+    -moz-box-shadow: 0px 0px 2px rgba(63, 89, 115, 0.08), 0px 2.5px 8px rgba(63, 89, 115, 0.2);
+    border-radius: 8px;
+    margin: 120px 0 0 0;
+}
+
+.panel-group .panel+.panel {
+    margin: 0 !important;
+}
+
+.path-taxonomy .icon {
+    float: right;
+    width: 12px;
+    height: 8px;
+}
+
+.path-taxonomy .accordion-title {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.path-taxonomy .quick-links .accordion-title {
+    border-bottom: 1px solid #00048433 !important;
+    border-bottom: 1px solid rgba(0, 4, 132, 0.2) !important;
+    border-radius: 0px;
+}
+
+.path-taxonomy .accordion-title a {
+    text-decoration: none;
+    padding: 20px 24px !important;
+    display: block;
+    color: #293033;
+}
+
+/* .taxonomy_term  .publications-form{
+    flex: 0 0 70%;
+} */
+.path-taxonomy .panel-body {
+    padding: 24px !important;
+    overflow-y: scroll;
+    height: 132px;
+    margin-right: 5px;
+}
+
+/* disease area child landing page design */
+.main-child-term .description {
+    margin: 0 0 64px 0;
+}
+
+.scientific-platform-cta {
+    background: var(--color-white);
+    background: #fff;
+    box-shadow: 0px 0px 2px rgb(63 89 115 / 8%), 0px 2.5px 8px rgb(63 89 115 / 20%);
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0px 0px 2px rgb(63 89 115 / 8%), 0px 2.5px 8px rgb(63 89 115 / 20%);
+    -moz-box-shadow: 0px 0px 2px rgb(63 89 115 / 8%), 0px 2.5px 8px rgb(63 89 115 / 20%);
+    border-radius: 52px;
+    padding: 20px 32px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+    color: #293033;
+    text-decoration: none;
+}
+
+.main-child-right-icon img {
+    width: 8px !important;
+    min-height: 12px !important;
+    margin: 0 0 0 17px !important;
+    padding: 10px 0;
+}
+
+/* disease area landing pages body styles */
+.path-taxonomy .latest-publications {
+    background: none;
+    padding: 0 0 64px 0;
+}
+
+.path-taxonomy .main-parent .description {
+    max-width: 75%;
+}
+
+.term-publicatations .count {
+    margin-left: auto;
+    flex: 0 0 6%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: rgba(41, 48, 51, 0.65);
+    color: #293033A6;
+}
+
+.term-publicatations .grid-icon {
+    margin-left: 32px;
+}
+
+.term-publicatations {
+    padding: 40px 0 0;
+}
+
+/* filters styles */
+.filter-dropdown-type label,
+.filers-ul .panel-body label {
+    display: inline-block;
+    white-space: nowrap;
+    width: 237px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filers-ul .panel-body label .filters-submit {
+    display: none;
+}
+
+.filters ul {
+    padding: 0;
+}
+
+.filter-sort-list,
+.filter-type-list {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 8px 28px 0;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.filters-submit {
+    display: none;
+}
+
+.filter-sort,
+.filter-type {
+    color: #293033;
+    text-decoration: none;
+    border: 1px solid #293033;
+    border-radius: 20px;
+    padding: 5px 9px;
+    cursor: pointer;
+}
+
+.down-arrow {
+    width: 11px;
+    min-height: 9px;
+    margin: 0 0 0 13px;
+}
+
+.filters-selected {
+    padding: 0 0 40px;
+    border-top: 1px solid #00048420;
+}
+
+.filters-selected ul {
+    display: inline-block;
+    padding: 0;
+}
+
+.filters-selected ul li {
+    list-style: none;
+    background: #FFFFFF;
+    border-radius: 100px;
+    padding: 8px 16px 8px 24px;
+    margin: 24px 12px 0 0;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: #293033;
+    display: inline-block;
+}
+
+.filter-icon {
+    display: none;
+    padding: 8px 125px 8px 127px;
+    text-align: center;
+    border-radius: 24px;
+    border: solid 1px rgba(41, 48, 51, 0.4);
+    margin: 0 0 24px;
+    color: #293033;
+    font-size: 14px;
+}
+
+.filter-icon img {
+    margin-right: 10px;
+}
+
+.clear-all {
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+    color: #003FE2;
+}
+
+.filters-selected ul li img {
+    padding: 0 0 0 15px;
+}
+
+.filter-dropdown-type {
+    width: 318px;
+}
+
+.filter-dropdown-sort {
+    width: 171px;
+}
+
+.filter-dropdown-sort {
+    display: none;
+}
+
+.filter-dropdown-type {
+    display: none;
+}
+
+.filter-dropdown-sort,
+.filter-dropdown-type {
+    position: absolute;
+    top: 35px;
+    left: -10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 2px rgb(63 89 115 / 40%), 0px 2px 40px rgb(63 89 115 / 20%);
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0px 0px 2px rgb(63 89 115 / 40%), 0px 2px 40px rgb(63 89 115 / 20%);
+    -moz-box-shadow: 0px 0px 2px rgb(63 89 115 / 40%), 0px 2px 40px rgb(63 89 115 / 20%);
+    border-radius: 8px;
+    padding: 34px 26px !important;
+    z-index: 1;
+}
+
+.filter-dropdown-sort li,
+.filter-dropdown-type li {
+    list-style-type: none;
+}
+
+.filter-dropdown-sort input,
+.filter-dropdown-type input {
+    margin-right: 10px;
+}
+
+/* filters mobile design */
+.show-filters {
+    display: block;
+}
+
+#popup {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 16px 0;
+    border-radius: 8px 8px 0 0;
+    -moz-box-shadow: 0 7px 8px -4px rgb(63 89 115 / 24%), 0 5px 40px 4px rgb(63 89 115 / 20%), 0 8px 16px 2px rgb(63 89 115 / 14%);
+    -webkit-box-shadow: 0 7px 8px -4px rgb(63 89 115 / 24%), 0 5px 40px 4px rgb(63 89 115 / 20%), 0 8px 16px 2px rgb(63 89 115 / 14%);
+    box-shadow: 0 7px 8px -4px rgb(63 89 115 / 24%), 0 5px 40px 4px rgb(63 89 115 / 20%), 0 8px 16px 2px rgb(63 89 115 / 14%);
+    background-color: #fff;
+    padding: 16px;
+    z-index: 9999;
+    margin-top: 64px;
+    transition: all 0.5s;
+    visibility: hidden;
+}
+
+#popup:target {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition: all .75s;
+}
+
+.term-popup ul {
+    padding: 0;
+}
+
+.term-popup .panel-body {
+    list-style-type: none;
+    text-align: start;
+    padding: 0 0 23px !important;
+    margin: 0;
+    height: unset;
+}
+
+.term-popup .panel-body label {
+    line-height: 1.14;
+    letter-spacing: 0.2px;
+    color: #293033;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.term-popup .filter-sort-list,
+.term-popup .filter-type-list {
+    display: block;
+    border-bottom: 1px solid #00048410;
+    border-radius: 0;
+    margin: 0 16px;
+}
+
+.term-popup .panel-default {
+    list-style-type: none;
+}
+
+.term-popup .filter-list a {
+    border: none;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #293033;
+}
+
+.term-popup .panel:not(:last-child) {
+    border: none !important;
+}
+
+.term-popup .filers-ul {
+    padding: 31px 0 0;
+    border-bottom: 1px solid #00048410;
+    height: 467px;
+    overflow: scroll;
+}
+
+.filter-close-icon {
+    float: right;
+}
+
+.filter-close-icon img {
+    width: 19px;
+    height: 19px;
+}
+
+.publications-form {
+    flex: 0 0 87%;
+}
+
+.filter-list-sort a {
+    border-top: 1px solid #00048410;
+    margin-top: 18px;
+}
+
+.count-mobile {
+    background: #003FE2;
+    border-radius: 6px;
+    text-align: center;
+    padding: 14px 16px;
+    color: #fff;
+    margin: 24px 0;
+}
+
+.filter-close-icon,
+.filter-icon {
+    cursor: pointer;
+}
+
+.taxonomy_term .main-child-term {
+    margin: 0 !important;
+}
+
+@media (max-width: 1300px) {
+    .taxonomy_term .region-top-banner {
+        padding: 0 55px;
+    }
+
+    .path-taxonomy.region-top-banner {
+        padding: 0 65px;
+    }
+
+    .path-taxonomy .head {
+        padding: 90px 0 0;
+    }
+
+    .path-taxonomy .title {
+        padding: 0 0 12px 0;
+    }
+
+    .path-taxonomy .description {
+        line-height: 27px;
+        max-width: 80%;
+    }
+
+    .term-publicatations .grid-icon {
+        margin-left: 15px;
+    }
+
+    /* filters styles */
+    .filter-sort-list,
+    .filter-type-list {
+        margin: 0 0 28px;
+    }
+
+    .down-arrow {
+        margin: 0 0 0 5px;
+    }
+
+    /* .term-publicatations .grid-icon{
+        margin-left: 6px;
+    } */
+    /* for child pages */
+}
+
+@media (max-width: 1023px) {
+    .path-taxonomy .region-top-banner {
+        height: 410px;
+        padding: 0 24px 0 40px !important;
+    }
+
+    .path-taxonomy .latest-publications-inner {
+        padding-top: 40px !important;
+    }
+
+    .disease_areas .main-child-term {
+        margin: 0 !important
+    }
+
+    #block-diseaseareasquicklinks {
+        padding-top: 60px;
+    }
+
+    .prostate-cancerenzalutamide .head {
+        max-width: 100%;
+    }
+
+    .path-taxonomy .quick-links {
+        margin: 45px 0 0 0;
+    }
+
+    .path-taxonomy .head {
+        padding: 128px 0 0;
+    }
+
+    .path-taxonomy .title {
+        padding: 10px 0;
+        font-size: 32px;
+    }
+
+    .path-taxonomy .head-internal {
+        padding-top: 0px;
+    }
+
+    .path-taxonomy .quick-links .panel-body {
+        height: 121px;
+        margin: 0 !important;
+        overflow-y: scroll;
+        padding: 24px 16px 17px !important;
+    }
+
+    .path-taxonomy .description {
+        font-size: 14px;
+        line-height: inherit;
+        max-width: 90%;
+    }
+
+    .path-taxonomy .accordion-title a {
+        padding: 19px 16px 21px !important;
+    }
+
+    .term-publicatations {
+        padding: 0;
+        display: block;
+    }
+
+    .term-publicatations .count,
+    .term-publicatations .grid-icon {
+        display: none;
+    }
+
+    .filters ul {
+        display: none;
+    }
+
+    .filter-icon {
+        display: block;
+        padding: 8px 115px 8px 127px;
+    }
+
+    .publications-form {
+        flex: 0 0 80%;
+        -webkit-flex: 0 0 80%;
+        -moz-flex: 0 0 80%;
+        -ms-flex: 0 0 80%;
+        -o-flex: 0 0 80%;
+    }
+
+    .disease_areas .materials-wrapper,
+    .congressesother-congresses .materials-wrapper,
+    .disease-areasother-indications .materials-wrapper {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .path-taxonomy .region-top-banner {
+        height: 495px;
+        padding: 16px !important;
+    }
+
+    .path-taxonomy .header-wrapper {
+        display: block;
+    }
+
+    .path-taxonomy .head {
+        padding: 30px 0 0 0;
+        max-width: 100%;
+    }
+
+    .path-taxonomy .latest-publications {
+        padding: 0;
+    }
+
+    .path-taxonomy .head-internal {
+        padding: 36px 0;
+        margin-top: 51px;
+    }
+
+    .path-taxonomy .title {
+        padding: 0;
+        line-height: 1.25;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .path-taxonomy .description {
+        font-size: 14px;
+        line-height: inherit;
+    }
+
+    #block-diseaseareasquicklinks {
+        padding: 0;
+    }
+
+    .path-taxonomy .quick-links {
+        max-width: 100%;
+        width: 360px;
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 10;
+        margin-top: 0;
+    }
+
+    .path-taxonomy .accordion-title a {
+        padding: 19px 16px 21px !important;
+    }
+
+    .term-publicatations {
+        padding: 0;
+        display: block;
+    }
+
+    .term-publicatations .count,
+    .term-publicatations .grid-icon {
+        display: none;
+    }
+
+    .filters ul {
+        display: none;
+    }
+
+    /* disease area child landing pages styles */
+    .scientific-platform-cta {
+        padding: 15px 24px;
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .disease-area-btn {
+        margin-bottom: 40px;
+    }
+
+    .taxonomy_term .latest-publications-inner {
+        margin-top: 0;
+        padding: 0 16px 42px !important;
+    }
+
+    .disease_areas .latest-publications {
+        margin-top: 80px;
+    }
+
+    /* ios issues hack */
+    @supports (-webkit-touch-callout: none) {
+        .disease_areas .latest-publications {
+            margin-top: 198px;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+html {
+    font-size: 16px;
+}
+
+body {
+  font-family: $font-notosans-regular;
+  font-size: 16px;
+  color: $color--branding-desc;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: $font-notosans-light;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: $color--theme;
+  word-break: break-word;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+b, strong {
+  font-family: $font-notosans-bold;
+}
+.container {
+  @media screen and (min-width: 1440px) {
+    width: 1374px;
+  }
+}

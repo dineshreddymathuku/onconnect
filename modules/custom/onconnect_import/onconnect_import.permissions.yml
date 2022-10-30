@@ -1,0 +1,3 @@
+administer onconnect import:
+  title: 'Administer onconnect import'
+  restrict access: true

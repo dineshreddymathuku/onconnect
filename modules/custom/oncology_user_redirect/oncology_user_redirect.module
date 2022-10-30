@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * User Direct Module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function oncology_user_redirect_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'oncology_user_redirect_user_login_form_submit';
+}
+
+/**
+ * Custom submit handler for the login form.
+ */
+function oncology_user_redirect_user_login_form_submit($form, FormStateInterface $form_state) {
+  $frontPage = \Drupal::configFactory()
+    ->get('system.site')
+    ->get('page.front');
+
+  $url = Url::fromUserInput($frontPage);
+  $form_state->setRedirectUrl($url);
+
+}

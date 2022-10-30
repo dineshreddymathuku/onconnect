@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for bibliograpy module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function onconnect_bibliograpy_schema() {
+  $schema['bibliograpy'] = [
+    'description' => 'A record of which users have added which publications to bibliograpy.',
+    'fields' => [
+      'uid' => [
+        'description' => 'The uid of user.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'nid' => [
+        'description' => 'The publication nid that was added.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'timestamp' => [
+        'description' => 'The timestamp at which the publication added.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['uid', 'nid'],
+    'indexes' => [
+      'nid' => ['nid'],
+    ],
+  ];
+  return $schema;
+}

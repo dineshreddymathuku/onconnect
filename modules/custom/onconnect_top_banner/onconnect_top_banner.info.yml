@@ -1,0 +1,7 @@
+name: Oncology Top Banner
+type: module
+description: 'Custom development for oncology dynamic top banner.'
+package: Custom
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - block

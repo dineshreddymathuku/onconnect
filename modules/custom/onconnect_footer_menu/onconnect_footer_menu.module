@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Footer menu module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function onconnect_footer_menu_theme() {
+  return [
+    'footer_menu' => [
+      'variables' => [
+        'menus' => NULL,
+      ],
+      'template' => 'footer_menu',
+    ],
+  ];
+}

@@ -1,0 +1,162 @@
+.container-full {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(161.53deg, #EAEBF0 31.57%, #D7D8DD 94.54%);
+  background-position: right bottom;
+  background-image: url('/profiles/pfpfizeridcom_profile/themes/idpfizer/images/homehero-mobile.png');
+  background-color: #E7EFF7;
+  background-size: auto;
+  min-height: 700px;
+  background-repeat: no-repeat;
+
+  @media screen and (min-width: 768px) {
+    background-size: 58%;
+  }
+
+  @media screen and (min-width: 992px) {
+    background-image: url('/profiles/pfpfizeridcom_profile/themes/idpfizer/images/homehero-latest.png');
+    display: flex;
+    align-items: center;
+    background-size: 100%;
+  }
+
+  @media screen and (min-width: 1200px) {
+    background-position: left;
+    background-size: auto;
+  }
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 167.5%;
+  color: #4C5459;
+  margin-top: 3rem;
+  margin-bottom: 0;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2.875rem;
+    line-height: 57px;
+  }
+
+  @media screen and (min-width: 992px) {
+    margin-top: 0;
+  }
+  &.home-title {
+    @media screen and (min-width: 992px) {
+      max-width: 500px;
+    }
+  }
+}
+
+p.welcome-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #4C5459;
+  margin: 1.5rem 0;
+}
+
+.login-btn {
+  @include button;
+
+  span {
+    &.glyphicon-log-in {
+      display: none;
+    }
+  }
+}
+
+a {
+  &.login-btn {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: $color--theme;
+    border: 1px solid $color--theme;
+    border-radius: 80px;
+    padding: 0.75rem 1rem;
+    display: inline-block;
+
+    @media screen and (min-width: 768px) {
+      margin-top: 10px;
+    }
+  }
+
+  &.brand-element-btn {
+    position: relative;
+    padding-right: 2.25rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      background: url('/profiles/pfpfizeridcom_profile/themes/idpfizer/images/right-arrow.png') no-repeat;
+      right: 0.875rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background-size: 0.75rem;
+      top: 1.125rem;
+    }
+    &:hover {
+      &::after {
+        background-image: url('/profiles/pfpfizeridcom_profile/themes/idpfizer/images/arrow_white.svg');
+      }
+    }
+  }
+}
+
+.btn-primary {
+  &:focus {
+    outline: 0;
+    border: 1px solid $color--theme;
+    background-color: transparent;
+    color: $color--theme;
+  }
+}
+.path-frontpage {
+  background: none;
+  background-image: none;
+  background-position: initial;
+  background-attachment: unset;
+  background-size: auto;
+}
+
+.home-btns-wrap {
+  display: flex;
+  flex-direction: column;
+
+  >div {
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+
+    >div {
+      margin-right: 20px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.main-container {
+  padding: 0 1.5rem;
+  margin-top: 64px;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+    padding: 0;
+  }
+}
+
+.path-pfizer-login {
+  &::after {
+    content: none;
+  }
+  .breadcrumb {
+    display: none;
+  }
+}

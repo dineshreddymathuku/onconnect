@@ -1,0 +1,24 @@
+<div class="top-banner-block main-parent congresses-block">
+  <div class="head-internal">
+    <div class="head">
+    {% if data.parentName %}
+      <span class="bookmark">{{ "CONGRESS"|t }}</span>
+      <h2 class="title">{{ data.parentName }} {{ data.name }}
+      <span><img class="congress-dropdown" src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/congress-dropdown.svg" alt="dropdown-icon"></span>
+      </h2>
+        <ul class="congresses-select" onchange="window.location = this.options[this.selectedIndex].value">
+          {% for child in data.child_name %}
+            <li class="congress-child">
+              <a class="{{ child.selected_class }}" href="{{ child.alias }}" value="{{ child.alias }}" {{ child.selected }}>{{ data.parentName }} {{ child.name }}
+                  <span class="selcted-icon"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/selected.svg" alt="selcted-icon"></span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      <div class="description">{{ data.description|raw }}</div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,72 @@
+.padd-0 {
+  padding: 0 !important;
+}
+
+.paddx-1 {
+  padding: 0 15px;
+}
+
+.padd-md-0 {
+  @media screen and (min-width: 768px) {
+    padding: 0 !important;
+  }
+}
+.mn-0 {
+  margin: 0 !important;
+}
+.w-100 {
+  width: 100%;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.base-font {
+  font-size: 1rem;
+}
+.line-26 {
+  line-height: 26.88px;
+}
+.logo-wrapper-content .logo-wrapper.base-font {
+  font-size: 1rem;
+}
+.logo-wrapper-content .logo-wrapper.line-26 {
+  line-height: 26.88px;
+}
+.mw-704 {
+  width: 100%;
+  max-width: 704px;
+}
+.color-theme {
+  color: $color--theme;
+}
+.text-gray-4 {
+  color: $color--grey--four;
+}
+.text-gray-2 {
+  color: $color--branding-desc;
+}
+.text-lightgreen {
+  color: $color--lightgreen;
+}
+.text-red {
+  color: $color--red;
+}
+.text-purple {
+  color: $color--purple;
+}
+.text-green {
+  color: $color--green;
+}
+.text-orange {
+  color: $color--orange;
+}
+.font-size--l {
+  @media screen and (min-width: 992px) {
+    font-size: 1.25rem;
+  }
+}
+.font-size--s {
+  font-size: 14px;
+}

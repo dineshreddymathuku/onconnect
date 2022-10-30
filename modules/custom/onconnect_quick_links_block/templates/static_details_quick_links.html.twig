@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="quick-links">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      {% for key,rows in data %}
+        <div class="panel panel-default">
+          <div role="tab" id="heading{{ key|replace({' ': ''}) }}">
+            <div class="accordion-title">
+              <a class="click collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                 href="#collapse{{ key|replace({' ': '','/':''}) }}"
+                 aria-expanded="true" aria-controls="collapse{{ key|replace({' ': '','/':''}) }}">
+                {{ key|upper|t }}
+                <img class="icon"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/angle-down-arrow.svg"
+                     alt="down-arrow-icon">
+                <span class="metrics-heading">
+                                    <span class="img-container-tooltip">
+                                        <img class="tooltip-icon small-info-icon"
+                                             src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/info-small.svg"
+                                             alt="info-icon-icon">
+                                        <span class="matrics-tooltip">{{ hoverDashboard }}
+                                        </span>
+                                    </span>
+                                </span>
+              </a>
+            </div>
+          </div>
+          <div id="collapse{{ key|replace({' ': '','/':''}) }}" class="panel-collapse collapse" role="tabpanel"
+               aria-labelledby="heading{{ index }}">
+            <div class="panel-body">
+                {% for index,row in rows %}
+
+                    {% if key == 'metrics' %}
+                        <div class="accordionMetricsData">
+                          <span class="accordionMetricsData-title">{{ row.title|t }}</span>
+                          <span class="accordionMetricsData-count">{{ row.uri }}</span>
+                        </div>
+                    {% else %}
+                        <a href="{{ row.uri }}" role="button">{{ row.title|t }}</a>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

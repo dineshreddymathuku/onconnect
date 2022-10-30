@@ -1,0 +1,24 @@
+{% if data.parent %}
+  {% set name = "Disease Area" %}
+  {% set class = "main-parent" %}
+{% else %}
+  {% set name = "PRODUCT/ASSET" %}
+  {% set class = "main-child-term" %}
+{% endif %}
+<div class="top-banner-block {{ class }}">
+  <div class="head">
+    {% if data.name %}
+      <div class="head-internal">
+        <span class="bookmark">{{ name|t }}</span>
+        <h2 class="title">{{ data.name }}</h2>
+        <div class="description">{{ data.description|raw }}</div>
+        {% if data.reference %}
+          <a class="scientific-platform-cta" href="{{ data.reference }}">{{ data.referenceName }} {{ "Scientific Platform"|t }}
+          <span class="main-child-right-icon"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon.svg" alt="right arrow-icon"></span>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+

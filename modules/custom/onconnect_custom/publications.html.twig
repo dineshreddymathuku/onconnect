@@ -1,0 +1,144 @@
+<div class="latest-publications" id="latest-publications">
+  <div class="latest-publications-inner">
+    <div class="title publications-view">
+      <div class="publicatations-title">
+        <h3>{{ "Latest Publications"|t }}</h3>
+      </div>
+      <div class="grid-list-icon">
+      <span class="grid hidden"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/grid.svg"
+                                     alt="grid-icon"></span>
+        <span class="list"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list.svg"
+                                alt="list-icon"></span>
+      </div>
+    </div>
+    <div class="publications-grid">
+      {% for publication in data %}
+        <div class="publications-grid-data">
+          <div class="publications-{{ publication.publication_type|replace({' ': '-'})|lower }}">
+          <span class="bookmark"><a class="use-ajax" id="modal-popup-scroll"
+                                    data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                                    data-dialog-type="modal"
+                                    href="{{ publication.alias }}">{{ publication.publication_type }}</a></span>
+            <span data-nid="{{ publication.nid }}" class="menu-icon menu-icon-grid">
+            <a href="#" data-nid="{{ publication.nid }}" aria-label="list-icon">
+              <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list_icon.svg"
+                   alt="list-view-icon">
+            </a>
+          </span>
+            <div id="menu-link-grid-{{ publication.nid }}" class="menu-link-grid-dropdown hidden">
+              <ul class="list-unstyled dropdown-grid">
+                {% set roles = user.getroles(TRUE) %}
+                {% if ('self_service_editor' in roles) or ('self_service_manager' in roles) or ('self_service_publisher' in roles) %}
+                  <li>
+                    <a href="/node/{{ publication.nid }}/edit">{{ "Edit"|t }}</a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a
+                    class="bibliograpy-links {{ publication.checkBibliograpy.class }} bibliograpy-links-{{ publication.nid }}"
+                    data-nid="{{ publication.nid }}"
+                    id="publication-{{ publication.nid }}" onclick="return false;"
+                    href="{{ publication.checkBibliograpy.link }}">{{ publication.checkBibliograpy.title|t }}</a>
+                </li>
+                <li>
+                  <a class="use-ajax" id="modal-popup-scroll-list"
+                     data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                     data-dialog-type="modal" href="{{ publication.alias }}">{{ "Open"|t }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="publications-date">
+            {% if publication.latest %}
+              <span class="latest"><img
+                  src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/Ellipse.svg" alt="dot-icon">
+            </span>
+            {% endif %}
+            <span class="date">{{ publication.datePublished }}</span>
+          </div>
+          <div class="publications-description grid-text">{{ publication.description|raw }}</div>
+          <div class="publication-journal-container clearfix pt-3">
+            {% if publication.journal %}
+              <div class="publication-journal">
+                <div class="grid-journal-title">{{ "Journal"|t }}</div>
+                <div class="grid-journal">{{ publication.journal|t }}</div>
+              </div>
+            {% endif %}
+            {% if publication.indication %}
+              <div class="publication-indication-grid">
+                <div class="grid-indication-title"> {{ "Indication"|t }}</div>
+                <div class="grid-indication"> {{ publication.indication|t }}</div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="publications-list hidden">
+      {% for publication in data %}
+        <div class="publications-list-data row">
+          <div class="col-lg-2 col-md-2 publications-{{ publication.publication_type|replace({' ': '-'})|lower }}">
+          <span class="bookmark"><a class="use-ajax" id="modal-popup-scroll-list"
+                                    data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                                    data-dialog-type="modal"
+                                    href="{{ publication.alias }}">{{ publication.publication_type }}</a></span>
+            <div class="publications-date">
+              {% if publication.latest %}
+                <span class="latest"><img
+                    src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/Ellipse.svg" alt="dot-icon">
+            </span>
+              {% endif %}
+              <span class="date">{{ publication.datePublished }}</span>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <span class="list-title">title</span>
+            <div class="publications-description list-text">{{ publication.description|raw }}</div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                {% if publication.journal %}
+                  <div class="list-journal-title">{{ "Journal"|t }}</div>
+                  <div class="publication-journal">{{ publication.journal|t }}</div>
+                {% endif %}
+              </div>
+              <div class="col-lg-6 col-md-6">
+                {% if publication.indication %}
+                  <div class="list-indication-title"> {{ "Indication"|t }}</div>
+                  <div class="publication-indication">{{ publication.indication|t }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div data-nid="{{ publication.nid }}" class="col-lg-2 col-md-2 menu-icon menu-icon-list"><img
+              src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list_icon.svg"
+              alt="list-view-icon">
+            <div id="menu-link-list-{{ publication.nid }}" class="menu-link-list-dropdown hidden">
+              <ul class="list-unstyled dropdown-list">
+                {% set roles = user.getroles(TRUE) %}
+                {% if ('self_service_editor' in roles) or ('self_service_manager' in roles) or ('self_service_publisher' in roles) %}
+                  <li>
+                    <a href="/node/{{ publication.nid }}/edit">{{ "Edit"|t }}</a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a
+                    class="bibliograpy-links bibliograpy-links-{{ publication.nid }} {{ publication.checkBibliograpy.class }}"
+                    data-nid="{{ publication.nid }}"
+                    id="{{ publication.checkBibliograpy.class }}-{{ publication.nid }}" onclick="return false;"
+                    href="{{ publication.checkBibliograpy.link }}">{{ publication.checkBibliograpy.title|t }}</a>
+                </li>
+                <li>
+                  <a class="use-ajax" id="modal-popup-scroll-list"
+                     data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                     data-dialog-type="modal" href="{{ publication.alias }}">{{ "Open"|t }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

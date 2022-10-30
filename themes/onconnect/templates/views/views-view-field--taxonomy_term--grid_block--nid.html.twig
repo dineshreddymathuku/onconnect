@@ -1,0 +1,57 @@
+{{ attach_library("onconnect/publications") }}
+<div class="publications-grid">
+  <div class="publications-grid-data">
+    <div class="publications-manuscript">
+          <span class="bookmark"><a class="use-ajax" data-dialog-options="{&quot;width&quot;:800}"
+                                    data-dialog-type="modal"
+                                    href="{{ publication.alias }}">{{ publication.publication_type }}</a></span>
+      <span data-nid="{{ publication.nid }}" class="menu-icon menu-icon-grid">
+            <a href="#" data-nid="{{ publication.nid }}" aria-label="list-icon">
+              <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list_icon.svg"
+                   alt="list-view-icon">
+            </a>
+          </span>
+      <div id="menu-link-grid-{{ publication.nid }}" class="menu-link-grid-dropdown hidden">
+        <ul class="list-unstyled dropdown-grid">
+          {% set roles = user.getroles(TRUE) %}
+          {% if ('self_service_editor' in roles) or ('self_service_manager' in roles) or ('self_service_publisher' in roles) %}
+            <li>
+              <a href="/node/{{ publication.nid }}/edit">{{ "Edit"|t }}</a>
+            </li>
+          {% endif %}
+          <li>
+            <a class="bibliography-links {{ publication.checkBibliograpy.class }}" data-nid="{{ publication.nid }}"
+               id="publication-{{ publication.nid }}" onclick="return false;"
+               href="{{ publication.checkBibliograpy.link }}">{{ publication.checkBibliograpy.title|t }}</a>
+          </li>
+          <li>
+            <a href="/node/{{ publication.nid }}">{{ "Open"|t }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="publications-date">
+      {% if publication.latest %}
+        <span class="latest"><img
+            src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/Ellipse.svg" alt="dot-icon">
+            </span>
+      {% endif %}
+      <span class="date">{{ publication.datePublished }}</span>
+    </div>
+    <div class="publications-description grid-text">{{ publication.description|raw }}</div>
+    <div class="publication-journal-container clearfix pt-3">
+      {% if publication.journal %}
+        <div class="publication-journal">
+          <div class="grid-journal-title">{{ "Journal"|t }}</div>
+          <div class="grid-journal">{{ publication.journal|t }}</div>
+        </div>
+      {% endif %}
+      {% if publication.indication %}
+        <div class="publication-indication-grid">
+          <div class="grid-indication-title"> {{ "Indication"|t }}</div>
+          <div class="grid-indication"> {{ publication.indication|t }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

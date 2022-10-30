@@ -1,0 +1,267 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  {{ title_prefix }}
+  {% if label and not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+  <div{{ content_attributes }}>
+    <div class="header">
+      <div class="attachment">
+        <span class="image">
+        {% if thumbnailAttachment %}
+          <img src="/image/view/{{ thumbnailAttachment }}"
+               alt="manuscript-book">
+          {% else %}
+          <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/publicationimg.png"
+               alt="manuscript-book">
+        {% endif %}
+        </span>
+        <span class="pdf">{{ fileData.type }}</span>
+        <span class="mb">{{ fileData.fileSize }}</span>
+      </div>
+      {% if description_trim %}
+        <div class="description description-trim">
+          {# {{ content.body }} #}
+          {{ description_trim|raw }}
+        </div>
+        {% if description %}
+          <div class="description description-full hidden">
+            {{ description|raw }}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="main-body">
+      {% if attachments %}
+        <div class="attachments">
+          <span class="authors-title">{{ "Attachments"|t }}</span>
+          {% for attachmentsKey, attachment in attachments %}
+            {% if attachmentsKey == "file" %}
+              {% for attachmentData in attachment %}
+                <div class="pdf-link">
+                {{ attachmentData.file }}
+                  <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/pdf.svg" alt="pdf-icon">
+                  <span> <a href="/view/file/{{ attachmentData.url }}  {#{{ attachmentData.fileUrl }}#}" target="_blank">{{ attachmentData.title }}</a><span
+                      class="details">
+                        {{ attachmentData.type }} ({{ attachmentData.fileSize }})
+                      </span></span>
+                </div>
+              {% endfor %}
+            {% elseif attachmentsKey == "links" %}
+              {% for attachmentData in attachment %}
+                <div class="link">
+                  <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/link.svg"
+                       alt="link-icon">
+                  <span> <a href="{{ attachmentData.url }}" target="_blank">{{ attachmentData.title }}</a></span>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if authors %}
+        <div class="authors">
+          <span class="authors-title">{{ "Authors"|t }}</span>
+          <span class="author-names author-number">{{ authors|raw }}</span>
+          {% if authorsFull %}
+            <span class="author-names authors-names-full hidden">{{ authorsFull|raw }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="type-sponser row">
+        <div class="left col-lg-6 col-md-6 left col-sm-6 col-xs-6">
+          {% if content.field_publication_type %}
+            <div class="publication-type">
+              <span class="authors-title">{{ "Type"|t }}</span>
+              <div class="popup-details">{{ content.field_publication_type }}</div>
+            </div>
+          {% endif %}
+          {% if content.field_publication_journal|render is not empty %}
+            <div class="publication-journal">
+              <span class="authors-title">{{ "Journal"|t }}</span>
+              <div class="popup-details">{{ content.field_publication_journal }}</div>
+            </div>
+            {% else %}
+             <div class="publication-journal">
+              <span class="authors-title">{{ "Journal"|t }}</span>
+              <div class="popup-details"> {{ "N/A"|t }} </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="right col-lg-6 col-md-6 left col-sm-6 col-xs-6">
+          {% if content.field_publication_year|render %}
+            <div class="publication-year">
+              <span class="authors-title">{{ "Year"|t }}</span>
+              <div class="popup-details">{{ content.field_publication_year }}</div>
+            </div>
+            {% else %}
+             <div class="publication-year">
+              <span class="authors-title">{{ "Year"|t }}</span>
+              <div class="popup-details">{{ "N/A"|t }}</div>
+            </div>
+          {% endif %}
+          {% if congress_abbr %}
+          <div class="publication-congress-abbr">
+                <span class="congress-abbr-title">{{ "Congress"|t }}</span>
+            <div class="congress-abbr">{{ congress_abbr|upper }}</div>
+          </div>
+		  {% else %}
+		  <div class="publication-congress-abbr">
+                <span class="congress-abbr-title">{{ "Congress"|t }}</span>
+            <div class="congress-abbr">{{ "N/A"|t }}</div>
+          </div>
+	        {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        {% if indication|length > 0 %}
+          <div class="publication-indication col-lg-6 col-md-6 col-sm-6 col-6">
+            <span class="authors-title">{{ "Indication"|t }}</span>
+            {#  <div class="popup-details">{{ content.field_publication_indication }}</div> #}
+            <div class="popup-details">{{ indication }}</div>
+          </div>
+          {% else %}
+          <div class="publication-indication col-lg-6 col-md-6 col-sm-6 col-6">
+            <span class="authors-title">{{ "Indication"|t }}</span>           
+            <div class="popup-details">{{ "N/A"|t }}</div>
+          </div>
+        {% endif %}
+        {% if product %}
+            <div class="publication-product col-lg-6 col-md-6 col-sm-6 col-6">
+                  <span class="product-title">{{ "Product"|t }}</span>
+              <div class="product">{{ product }}</div>
+            </div>
+			{% else %}
+			 <div class="publication-product col-lg-6 col-md-6 col-sm-6 col-6">
+                  <span class="product-title">{{ "Product"|t }}</span>
+              <div class="product">{{ "N/A"|t }}</div>
+            </div>
+        {% endif %}
+      </div>
+      {% if study_names %}
+        <div class="publication-study-name">
+          <span class="authors-title">{{ "Study name"|t }}</span>
+          <div class="study-details">{{ study_names }}</div>
+        </div>
+      {% endif %}
+      {% if studyNumbers %}
+        <div class="publication-study-numbers">
+          <span class="authors-title">{{ "Study numbers"|t }}</span>
+          <span class="study-details study-numbers">{{ studyNumbers|raw }}</span>
+          {% if studyNumbersFull %}
+            <span class="study-details study-numbers-full hidden">{{ studyNumbersFull|raw }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+	  {% if citation_info %}
+	   <div class="publication-citation-info">
+          <span class="citation-info-title">{{ "Citation Information"|t }}</span>
+		  <div class="citation-description">{{ citation_info|raw }}</div>
+	  </div>
+	  {% endif %}
+      {% if related_publications %}
+        <div class="related-publications">
+          <span class="authors-title">{{ "Related Publications"|t }}</span>
+          {% for relatedPublicationData in related_publications %}
+            <div class="related-publications-data">
+              <span class="study-details">
+              <img src="/image/view/{{ relatedPublicationData.fid }}" class="publicatation-image"></img>
+              <a class="use-ajax" id="modal-popup-scroll"
+                 data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                 data-dialog-type="modal"
+                 href="{{ relatedPublicationData.alias }}">{{ relatedPublicationData.title }}</a>
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="popup-footer">
+      {% if resourceLink %}
+        <div class="open"><a target="_blank" href="/view/file/link/{{ nodeID }}">Open</a></div>
+      {% endif %}
+      {% if bibliographyCheck.class == 'bibliograpy-links-add' %}{% set symbol= '+' %} {% else %} {% set symbol= '-' %}{% endif %}
+      <div class="add-to-bibliography">
+        <a class="parent-link bibliograpy-links {{ bibliographyCheck.class }}" data-nid="{{ node.id }}"
+           id="publication-{{ publication.nid }}" onclick="return false;"
+           href="{{ bibliographyCheck.link }}">{{ symbol }} {{ bibliographyCheck.title|t }}</a></div>
+
+    </div>
+  </div>
+</article>

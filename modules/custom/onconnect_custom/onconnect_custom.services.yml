@@ -1,0 +1,5 @@
+services:
+  onconnect_custom.event_subscriber:
+    class: Drupal\onconnect_custom\EventSubscriber\OnConnectSubscriber
+    tags:
+      - {name: event_subscriber}

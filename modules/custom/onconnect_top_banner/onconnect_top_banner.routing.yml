@@ -1,0 +1,39 @@
+onconnect_top_banner.admin_settings_form:
+  path: '/admin/config/onconnect/settings/top-banner'
+  defaults:
+    _form: '\Drupal\onconnect_top_banner\Form\TopBannerForm'
+    _title: 'Default Banner Settings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+onconnect_top_banner.disease_areas_form:
+  path: '/admin/config/onconnect/settings/disease_areas_banner'
+  defaults:
+    _form: '\Drupal\onconnect_top_banner\Form\DiseaseAreasForm'
+    _title: 'Disease Area and Assets/Product Banner'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+onconnect_top_banner.congresses_form:
+  path: '/admin/config/onconnect/settings/congresses_banner'
+  defaults:
+    _form: '\Drupal\onconnect_top_banner\Form\CongressesForm'
+    _title: 'Congresses Banner'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+onconnect_top_banner.scientific_platform_form:
+  path: '/admin/config/onconnect/settings/scientific_platform_banner'
+  defaults:
+    _form: '\Drupal\onconnect_top_banner\Form\ScientificPlatformForm'
+    _title: 'Scientific Platform Banner'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

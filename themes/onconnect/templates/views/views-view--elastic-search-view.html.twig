@@ -1,0 +1,120 @@
+{#
+/**
+ * @file
+ * Default theme implementation for main view template.
+ *
+ * Available variables:
+ * - attributes: Remaining HTML attributes for the element.
+ * - css_name: A CSS-safe version of the view name.
+ * - css_class: The user-specified classes names, if any.
+ * - header: The optional header.
+ * - footer: The optional footer.
+ * - rows: The results of the view query, if any.
+ * - empty: The content to display if there are no rows.
+ * - pager: The optional pager next/prev links to display.
+ * - exposed: Exposed widget form/info to display.
+ * - feed_icons: Optional feed icons to display.
+ * - more: An optional link to the next page of results.
+ * - title: Title of the view, only used when displaying in the admin preview.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the view title.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the view title.
+ * - attachment_before: An optional attachment view to be displayed before the
+ *   view content.
+ * - attachment_after: An optional attachment view to be displayed after the
+ *   view content.
+ * - dom_id: Unique id for every view being printed to give unique class for
+ *   JavaScript.
+ *
+ * @see template_preprocess_views_view()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    dom_id ? 'js-view-dom-id-' ~ dom_id,'view-elastic-search-view'
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title }}
+  {{ title_suffix }}
+
+	{{ exposed }}
+  
+  {{ attachment_before }}
+  
+
+<div class="search-page-main-contianer row">
+  <div class="mobile-count-block">
+    <div>
+      {% if header %}
+        <header class="results-count">
+          {{ header }}
+        </header>
+      {% endif %}
+    </div>
+    <div>
+      <span class="filter-icon search-icon">
+        <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-mobile.svg" alt="filter-icon"/>
+        <span>Filters</span>
+      </span>
+    </div>
+  </div>
+<div class="col-lg-3 col-md-3 left-search-block">
+  {% if header %}
+    <header class="results-count">
+      {{ header }}
+    </header>
+  {% endif %}
+  <div class="categories">
+  <span class="category-heading">Category</span>
+  {{ drupal_entity('block','publicationtypeparent') }}
+  {{ drupal_entity('block','publicationtype') }}
+  {{ drupal_entity('block','relateddiseaseparent') }}
+  {{ drupal_entity('block','relatedtodiseaseareas') }}
+  {{ drupal_entity('block','relatedcongressesparent') }}
+  {{ drupal_entity('block','relatedtocongresses') }}
+  {{ drupal_entity('block','news') }}
+
+
+  <a class="clear-all" href="#">Clear all</a>
+  </div>
+</div>
+<div class="col-lg-9 col-md-9 right-search-block">
+   {% if rows -%}
+    {{ rows }}
+  {% elseif empty -%}
+    {{ empty }}
+  {% endif %}
+  
+    {% if footer %}
+    <footer class="showCount">
+      {{ footer }}
+    </footer>
+  {% endif %}
+  
+ {{ pager }} 
+</div>
+</div>
+
+
+  {{ attachment_after }}
+  {{ more }}
+
+  {{ feed_icons }}
+</div>
+
+{# mobile-filters popup #}
+<div class="mobile-search-categeory">
+  <span class="filter-close-icon search-close"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-close.svg" alt="filter-icon"></span>
+  {{ drupal_entity('block','publicationtypeparent') }}
+  {{ drupal_entity('block','publicationtype') }}
+  {{ drupal_entity('block','relateddiseaseparent') }}
+  {{ drupal_entity('block','relatedtodiseaseareas') }}
+  {{ drupal_entity('block','relatedcongressesparent') }}
+  {{ drupal_entity('block','relatedtocongresses') }}
+  {{ drupal_entity('block','news') }}
+</div>

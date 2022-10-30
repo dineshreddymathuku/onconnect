@@ -1,0 +1,23 @@
+onconnect_top_banner.home_banner:
+  route_name : onconnect_top_banner.admin_settings_form
+  title: Home Banner
+  base_route: onconnect_top_banner.admin_settings_form
+  weight: 10
+
+onconnect_top_banner.disease_areas:
+  route_name: onconnect_top_banner.disease_areas_form
+  title: Disease Area and Assets/Product Banner
+  base_route: onconnect_top_banner.admin_settings_form
+  weight: 20
+  
+onconnect_top_banner.congresses:
+  route_name: onconnect_top_banner.congresses_form
+  title: Congresses Banner
+  base_route: onconnect_top_banner.admin_settings_form
+  weight: 20
+  
+onconnect_top_banner.scientific_platform:
+  route_name: onconnect_top_banner.scientific_platform_form
+  title: Scientific Platform Banner
+  base_route: onconnect_top_banner.admin_settings_form
+  weight: 20

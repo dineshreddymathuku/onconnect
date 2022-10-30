@@ -1,0 +1,49 @@
+<div class="publication-submit-title publication-conceptform">
+    <h1>Publication Concept Submit Form</h1>
+    <p class="description">Introductory text: submission implies work described has not been published before; that it is not under consideration for publication anywhere else; that its publication has been approved by all co-authors, if any, as well as by the responsible authorities – tacitly or explicitly – at the institute where the work has been carried out. The publisher will not be held legally responsible should there be any claims for compensation</p>
+</div>
+<div class="publication-submit-form-wrapper">
+    <div class="publication-submit-form-wrapper-inner">
+        <div class="proposal-type">
+        <label class="publication-form-label">Proposal type</label>
+        <ul class="proposal-type-radio">
+        {% for key,sortData in publication_concept_form.proposal_type %}
+        <li>
+        <input type="radio" name="proposal-type" value="{{ key }}" class="{{ sortData|replace({' ': '-'})|lower }} form__radio-input"/>
+                            <label class="form__radio-label" for="{{ sortData|replace({' ': '-'})|lower }}">{{ sortData }} <span class="form__radio-button"></span></label>
+        </li>
+
+        {% endfor %}
+        </ul>
+        </div>
+        <div class="product-type row">
+        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 select-product">{{ publication_concept_form.spc_product }}</div>
+        <div class="col-lg-6 col-md-6 col-sm-12">{{ publication_concept_form.level_spc_support }}</div>
+        </div>
+
+        <div class="row row-2">
+        <div class="col-lg-6 col-md-6 col-sm-12 select-indication">{{ publication_concept_form.indication }}</div>
+        <div class="col-lg-6 col-md-6 col-sm-12">{{ publication_concept_form.publication_type }}</div>
+        </div>
+
+        <div class="pfizer-owner">{{ publication_concept_form.pfizer_publication_owner }}</div>
+
+        <div class="title-request">{{ publication_concept_form.title_request }}</div>
+
+        <div class="form-description">{{ publication_concept_form.description }}</div>
+
+        <div class="form-internal-author">{{ publication_concept_form.int_author }} <span class="help-text">Use commas to seperate multiple authors</span></div>
+        <div class="form-external-author">{{ publication_concept_form.ext_author }} <span class="help-text">Use commas to seperate multiple authors</span></div>
+
+        <div class="form-comments">{{ publication_concept_form.comments }} </div>
+
+        <div class="attachments">{{ publication_concept_form.attachments }}</div>
+        <div class="Disclaimer-text">Disclaimer text lorem ipsum dolor sit amet, conse adipiscing elit. Fuscene purus nec massa tristique volutpat in enim, duis vehicula turpis sed velit lorem ipsum dolor sit amet, conse adipiscing elit. Fuscene purus nec massa.</div>
+        <div calss="submit row">
+{#        <div class="col-lg-8 col-md-6 col-sm-12 save-btn">{{ publication_concept_form.save }} </div>#}
+        <div class="col-lg-2 col-md-3 col-sm-12 cancel-btn">{{ publication_concept_form.cancel }} </div>
+        <div class="col-lg-2 col-md-3 col-sm-12 submit-btn">{{ publication_concept_form.submit }}</div>        
+        </div>
+    </div>
+</div>

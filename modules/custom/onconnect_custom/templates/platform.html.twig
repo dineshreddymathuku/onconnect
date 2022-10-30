@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Document</title>
+</head>
+<body>
+<style>
+  @media print {
+    span {
+      bottom: 50.02rem;
+      right: 18.7rem;
+    }
+  }
+  @page {
+    margin: 50px 50px;
+  }
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  * { font-family: DejaVu Sans, sans-serif; }
+</style>
+<div>
+  {% for pillarData in pillarDatas %}
+    <div class="title" style="font-weight: bold">{{ pillarData.title|raw }}</div>
+    <div class="description">{{ pillarData.description|raw }}</div>
+    {% for data in pillarData.data %}
+      <div class="accordion-data" style="border-bottom: 1px solid black;">
+        <div class="accordion-title">{{ data.title|raw }}</div>
+        {% if data.description %}
+          <div class="accordion-description" style="margin-bottom: 15px">{{ data.description|raw }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% if pillarData.references %}
+      <div class="references-title">{{ "References"|t }}</div>
+      <div class="references-description">{{ pillarData.references|raw }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+</body>
+</html>

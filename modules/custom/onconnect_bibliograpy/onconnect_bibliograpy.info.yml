@@ -1,0 +1,5 @@
+name: Oncology Bibliograpy
+type: module
+description: 'Used to add/remove Publications in Bibliograpy.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

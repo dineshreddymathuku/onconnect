@@ -1,0 +1,43 @@
+{% if attachments %}
+  <div class="details-attachments">
+    {% for attachmentsKey, attachment in attachments %}
+      {% if attachmentsKey == "links" %}
+        {% for attachmentDataKey, attachmentData in attachment %}
+          <div class="attachment-card">
+            <span class="link-img"><img
+                src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/link-blue.svg" alt="link-icon"></span>
+            <div class="card-details-wrapper">
+              <p class="card-details">{{ attachmentData.title }}</p>
+            </div>
+            <div class="view-in-next-tab" onclick="location.href='{{ url }}'">
+              <span class="card-link"><a href="{{ attachmentData.url }}" target="_blank">{{ "View"|t }}</a></span>
+              <span class="open-img"><img
+                  src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/open.svg"
+                  alt="open-icon"></span>
+            </div>
+          </div>
+        {% endfor %}
+      {% elseif attachmentsKey == "file" %}
+        {% for attachmentData in attachment %}
+          <div class="attachment-card">
+            <span class="file-img"><img
+                src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/pdf-blue.svg"
+                alt="pdf-icon"></span>
+            <div class="card-details-wrapper">
+              <p class="card-details">{{ attachmentData.title }}</p>
+            </div>
+            <div class="download-pdf" onclick="location.href='/download/file/{{ attachmentData.url }}'">
+              <span>
+                <a href="/download/file/{{ attachmentData.url }}" target="_blank">{{ "Download"|t }}</a>
+                <span class="details">PDF ({{ attachmentData.fileSize }})</span>
+              </span>
+              <span class="download-img"><img
+                  src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/download.svg"
+                  alt="download-icon"></span>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

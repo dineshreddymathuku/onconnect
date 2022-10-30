@@ -1,0 +1,321 @@
+.path-frontpage .region-top-banner>div {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -moz-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  -o-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0 70px;
+}
+
+.userlogin #top-banner {
+  padding: 20px 0px 80px !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  height: 580px !important;
+}
+
+/* for login page */
+.userlogin .user-login-form {
+  padding: 40px 112px;
+  max-width: 1440px;
+  display: block;
+  margin: 0 auto;
+}
+
+.userlogin .nav-sitebranding {
+  width: 30%;
+  margin-right: 0;
+}
+
+.path-frontpage .welcome-msg {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 56px;
+  letter-spacing: -1px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.metrics {
+  width: 280px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 1px rgba(63, 89, 115, 0.08), 0px 2px 1px rgba(63, 89, 115, 0.14), 0px 1px 3px rgba(63, 89, 115, 0.25);
+  -webkit-appearance: none;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(63, 89, 115, 0.08), 0px 2px 1px rgba(63, 89, 115, 0.14), 0px 1px 3px rgba(63, 89, 115, 0.25);
+  -moz-box-shadow: 0px 0px 0px 1px rgba(63, 89, 115, 0.08), 0px 2px 1px rgba(63, 89, 115, 0.14), 0px 1px 3px rgba(63, 89, 115, 0.25);
+
+}
+
+.metrics ul li:first-child {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.metrics ul li span {
+  font-weight: 600;
+}
+
+.metrics ul li {
+  list-style-type: none;
+  padding: 10px 10px 13px 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0.20000000298023224px;
+  color: #293033;
+  text-transform: capitalize;
+}
+
+.metrics ul li:first-child {
+  color: rgba(41, 48, 51, 0.65);
+}
+
+.metrics ul li.metrics-heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #293033a6;
+}
+
+.metrics ul {
+  padding: 10px 15px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #00048433;
+}
+
+.metrics ul li span {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0.20000000298023224px;
+  color: #000484;
+}
+
+.metrics p {
+  position: relative;
+  padding: 20px 0px 23px 25px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0.2px;
+  color: #536471;
+}
+
+.metrics p span {
+  position: absolute;
+  right: 23px;
+}
+
+/*css for user banner*/
+.path-user .top-banner-header {
+  width: 2000px;
+  max-width: 100%;
+}
+
+.path-user .header-primary-menu {
+  padding: 40px 72px 30px;
+}
+
+/* user page */
+.path-user .welcome-msg {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 56px;
+  letter-spacing: -1px;
+  color: #ffffff;
+  margin: 0;
+  padding: 120px 0;
+  display: block;
+}
+
+.path-user #top-banner {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 580px;
+}
+
+/* css for show more and showcount */
+.showCount {
+  text-align: center;
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  color: #293033;
+  padding: 6px 0 16px;
+}
+
+.user-login-form .form-item {
+  padding-bottom: 25px;
+}
+
+.showmore-btn {
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #00048433;
+  border-bottom: 1px solid rgba(0, 4, 132, 0.2);
+  position: relative;
+  margin-bottom: 52px;
+}
+
+.showmore-btn a {
+  position: relative;
+  bottom: -10px;
+  padding: 0px 16px;
+  background: #f2f2f8;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.2px;
+  color: #003FE2;
+}
+
+.DiseaseAreas .left-menu li {
+  padding-left: 30px
+}
+
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) {
+  @media {
+    .dropdown-left {
+      width: 460px;
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .DiseaseAreas .left-menu li {
+    padding-left: 18px;
+  }
+
+  .DiseaseAreas .dropdown-right {
+    height: 823px !important;
+  }
+
+
+  .userlogin .nav-sitebranding {
+    width: 25%;
+  }
+
+  .userlogin .header-primary-menu {
+    justify-content: normal;
+  }
+
+  .path-user .header-primary-menu {
+    padding: 48px 24px 0px 24px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .userlogin .header-primary-menu {
+    justify-content: space-between;
+  }
+
+  .path-frontpage .top-banner-header {
+    padding: 0 24px 0 40px;
+  }
+
+  .showCount {
+    padding: 24px 0 6px;
+  }
+
+  #top-banner {
+    padding-bottom: 0;
+  }
+
+  .metrics ul li {
+    font-weight: normal;
+    line-height: normal;
+  }
+
+  .metrics ul li span {
+    line-height: normal;
+  }
+
+  .path-frontpage .welcome-msg {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.71px;
+    padding: 0 40px;
+    display: block;
+  }
+
+  .userlogin .user-login-form {
+    padding: 30px 24px;
+  }
+
+  .path-user .welcome-msg {
+    padding: 65px 0;
+    font-weight: normal;
+    font-size: 38px;
+    line-height: 130%;
+  }
+
+  .path-user #top-banner {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 767px) {
+  .path-frontpage .top-banner-header {
+    padding: 0;
+  }
+
+  .path-frontpage .region-top-banner>div {
+    -webkit-flex-direction: column-reverse;
+    -moz-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    -o-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    padding: 68px 0 38px;
+    justify-content: center;
+  }
+
+  .path-frontpage #top-banner {
+    height: 400px;
+  }
+
+  #block-metricsblock {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .metrics {
+    max-width: 100%;
+    width: 328px;
+    margin: 52px 0 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .path-user .welcome-msg {
+    font-weight: normal;
+    font-size: 38px;
+    line-height: 130%;
+  }
+
+  .path-user .header-primary-menu {
+    padding: 20px 16px 30px;
+  }
+
+  .userlogin .user-login-form {
+    padding: 20px 16px;
+  }
+}

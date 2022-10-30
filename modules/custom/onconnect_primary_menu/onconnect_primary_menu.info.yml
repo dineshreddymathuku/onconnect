@@ -1,0 +1,5 @@
+name: Oncology Primary Menu
+type: module
+description: 'Custom development for oncology primary menu.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

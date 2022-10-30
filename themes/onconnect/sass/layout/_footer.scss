@@ -1,0 +1,66 @@
+.path-frontpage {
+  footer {
+    &.footer {
+      position: relative;
+      background-color: $color--white;
+      color: $color--gray;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      padding: 1rem 0;
+      @media screen and (max-width:767px) {
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+      }
+    }
+  }
+}
+footer {
+  &.footer {
+    position: relative;
+    border-top: 1px solid $color--border--sidebar;
+    background-color: $color--white;
+    color: $color--gray;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 1rem 0;
+    @media screen and (max-width:767px) {
+      padding-top: 1.5rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+    .container {
+      @media screen and (max-width:767px) {
+        padding: 0 24px;
+      }
+    }
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.region-footer {
+  > section {
+    padding: 0;
+  }
+}
+#block-idpfizer-footer {
+  @media screen and (max-width:767px) {
+    padding-top: 1.5rem;
+  }
+  .list-inline {
+    margin: 0;
+    @media screen and (min-width: 768px) {
+      float: right;
+    }
+    li {
+      padding: 0 15px;
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+    a {
+      color: $color--gray;
+    }
+  }
+}

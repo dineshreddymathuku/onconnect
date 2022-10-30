@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Custom Metrics configuration.
+ */
+
+/**
+ * Custom Configuration dynamic table creation.
+ *
+ * Implements hook_schema()
+ */
+function onconnect_metrics_schema() {
+  $uniqueColumn = ['therapeutic_area_description'];
+  $schema['onconnect_metrics'] = [
+    'fields' => [
+      'metrics_id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'therapeutic_area_description' => [
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ],
+      'abstract_submit' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'abstract_published' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'manuscript_submit' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'manuscript_published' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'posters' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'metrics_status' => [
+        'type' => 'int',
+        'lemgth' => '11',
+      ],
+      'presentation' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'man_pls_submit' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'man_pls_published' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'abs_pls_submitted' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'metrics_updated_date' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+      'metrics_created_date' => [
+        'type' => 'int',
+        'length' => '11',
+      ],
+    ],
+    'primary key' => ['metrics_id'],
+    'unique keys' => ['metrics_machine_name' => $uniqueColumn],
+  ];
+  return $schema;
+}

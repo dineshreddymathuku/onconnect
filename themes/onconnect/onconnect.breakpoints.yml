@@ -1,0 +1,21 @@
+onconnect.small:
+  label: small
+  mediaQuery: "(max-width: 767px)"
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+
+onconnect.medium:
+  label: medium
+  mediaQuery: "(min-width: 768px) and (max-width: 1024px)"
+  weight: 1
+  multipliers:
+    - 1x
+
+onconnect.large:
+  label: medium
+  mediaQuery: "(min-width: 1025px)"
+  weight: 2
+  multipliers:
+    - 1x

@@ -1,0 +1,289 @@
+/* for banner */
+.congress-dropdown,
+.selcted-icon img {
+  cursor: pointer;
+  width: 24px !important;
+  min-height: 14px !important;
+}
+.congress-dropdown:hover {
+  background: rgba(41, 48, 51, 0.3);
+  border-radius: 8px;
+}
+.congresses .head {
+  position: relative;
+}
+#block-congressesquicklinks {
+  padding-top: 68px;
+}
+.congresses #headingmetrics .accordion-title{
+  box-shadow: 0px 0px 0px #fff;
+  width: 100%;
+}
+.congresses-select {
+  display: none;
+  position: absolute;
+  top: 220px;
+  left: 258px;
+  background: #fff;
+  padding: 0;
+  width: 199px;
+  max-width: 100%;
+  box-shadow: 0px 0px 2px rgb(63,89,115 , 0.4),0px 2px 40px rgb(63,89,115,0.2);
+  -webkit-appearance: none;
+  -webkit-box-shadow: 0px 0px 2px rgb(63,89,115 , 0.4),0px 2px 40px rgb(63,89,115,0.2);
+  -moz-box-shadow: 0px 0px 2px rgb(63,89,115 , 0.4),0px 2px 40px rgb(63,89,115,0.2);
+  border-radius: 8px;
+  z-index: 10;
+  height: 327px;
+  overflow: scroll;
+}
+.congress-filters-title{
+  padding: 72px 0 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  color: #293033;
+}
+.congress-dropdown-list {
+  display: block;
+}
+.selcted-icon img {
+  display: none;
+}
+.selected-congresses img {
+  padding: 4px;
+  display: block !important;
+}
+.congresses-select li {
+  list-style-type: none;
+}
+.congresses-select li a {
+  text-decoration: none;
+  color: #293033;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  display: block;
+  padding: 12px 24px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+.congresses-select li a[selected] {
+  background: rgba(63, 89, 115, 0.06);
+}
+/* resources styles */
+.congresses #block-resources {
+  padding: 44px 112px 48px;
+  background: #e8e8ef;
+}
+.congresses #block-resources h2 {
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  color: #293033;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 36px;
+  /* margin-top: 40px; */
+  margin: 0;
+}
+/* resources card */
+.congresses .details-attachments {
+  padding: 0;
+}
+.tootl-tip-display .tooltip-icon {
+  display: inline-block;
+  padding-left: 11px;
+}
+.tooltip-icon {
+  display: none;
+}
+.quick-links .panel-body a{
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  color: #003FE2;
+  display: block;
+  padding-bottom: 16px;
+}
+/* tooltip styles */
+.tootl-tip-display span.matrics-tooltip {
+  height: auto;
+  position: absolute;
+  border-radius: 8px;
+  padding: 12px 16px 12px 16px;
+  background: black;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  top: 34px;
+  left: -2px;
+  visibility: hidden;
+  text-transform: none !important;
+}
+.tootl-tip-display .metrics-heading span.img-container-tooltip {
+  position: relative;
+}
+.tootl-tip-display span.matrics-tooltip:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 15px solid #000;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  left: 17px;
+  top: -15px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+.tootl-tip-display .img-container-tooltip:hover span.matrics-tooltip {
+  visibility: visible;
+}
+.congresses .description {
+  max-width: 60%;
+}
+.congress-filters-title-mobile{
+  display: none;
+}
+.materials-wrapper{
+  display: none;
+}
+/* custom radio buttons */
+.form__radio-group {
+  margin-bottom: 15px;
+}
+.form__radio-input {
+  display: none;
+}
+.form__radio-label {
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  margin: 0;
+  padding-bottom: 28px;
+}
+.form__radio-button {
+  height: 20px;
+  width: 20px;
+  border: 2px solid rgba(41, 48, 51, 0.65);
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 3px;
+}
+.form__radio-button::after {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #003FE2;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.form__radio-input:checked ~ .form__radio-label .form__radio-button::after {
+  opacity: 1;
+}
+.form__radio-input:checked ~ .form__radio-label .form__radio-button{
+    border: 2px solid #003FE2;
+}
+@media (max-width: 1300px) {
+  .congresses-select {
+    top: 174px;
+    left: 254px;
+  }
+  .congresses #block-resources {
+    padding: 44px 55px 48px;
+  }
+}
+@media (max-width: 1023px) {
+  .congresses-select {
+    top: 193px;
+    left: 185px;
+  }
+  .congress-filters-title{
+    display: none;
+  }
+  .congresses .description {
+    max-width: 100%;
+  }
+  .congresses #block-resources {
+    padding: 44px 32px 48px;
+  }
+  .congresses .latest-publications-inner {
+    margin-top: 78px;
+    margin: 0;
+  }
+  .tootl-tip-display span.matrics-tooltip {
+    width: 200px;
+  }
+  .congress-filters-title-mobile{
+    display: block;
+  }
+  .congresses .materials-wrapper, .congressesother-congresses .materials-wrapper{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .congresses .filter-icon, .congressesother-congresses .filter-icon{
+    padding: 8px 19px 8px 20px;
+    margin: 0;
+  }
+}
+@media (max-width: 767px) {
+  .congresses-select {
+    top: 80px;
+    left: auto;
+    z-index: 20;
+    right: 10px;
+  }
+  .congresses #block-resources {
+    padding: 32px 16px 0;
+    margin-top: 80px;
+  }
+  .congresses .description {
+    max-width: 100%;
+  }
+  .congress-dropdown {
+    float: right;
+  }
+  #block-congressesquicklinks {
+    padding-top: 0;
+  }
+  .congresses .term-publicatations {
+    padding-top: 40px;
+    margin-top: 0;
+  }
+  /* ios issues hack */
+  @supports (-webkit-touch-callout: none) {
+    .congresses #block-resources {
+      margin-top: 108px;
+    }
+  }
+}
+

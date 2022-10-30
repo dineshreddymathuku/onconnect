@@ -1,0 +1,6 @@
+bibliograpy:
+  js:
+    js/bibliograpy.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal

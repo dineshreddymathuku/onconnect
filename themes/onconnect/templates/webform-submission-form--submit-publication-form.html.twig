@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a webform submission form.
+ *
+ * Available variables:
+ * - form: The webform submission form.
+ *
+ * @ingroup themeable
+ */
+#}
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+<div class="publication-submit-title publication-conceptform">
+  {{ form.elements.top_description }}
+</div>
+<div class="publication-submit-form-wrapper">
+  <div class="publication-submit-form-wrapper-inner">
+    <div class="proposal-type">
+      <label class="publication-form-label">Proposal type</label>
+      {{ form.elements.publication_concept_submit_form.proposal_type }}
+    </div>
+    <div class="product-type row">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 select-product">
+          {{ form.elements.publication_concept_submit_form.spc_product }}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          {{ form.elements.publication_concept_submit_form.level_of_spc_support }}
+        </div>
+      </div>
+      <div class="row row-2">
+        <div class="col-lg-6 col-md-6 col-sm-12 select-indication">
+          {{ form.elements.publication_concept_submit_form.indication }}
+        </div>
+        {# <div class="col-lg-6 col-md-6 col-sm-12">
+          {{ form.elements.publication_concept_submit_form.select_publication_type }}
+        </div> #}
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          {{ form.elements.publication_concept_submit_form.publication_type }}
+        </div>
+      </div>
+      <div class="pfizer-owner">
+        {{ form.elements.publication_concept_submit_form.owner }}
+      </div>
+      <div class="title-request">
+        {{ form.elements.publication_concept_submit_form.title_of_request }}
+      </div>
+      <div class="form-description">
+        {{ form.elements.publication_concept_submit_form.description }}
+      </div>
+      <div class="form-internal-author">
+        {{ form.elements.publication_concept_submit_form.internal_authors }}
+      </div>
+      <div class="form-external-author">
+        {{ form.elements.publication_concept_submit_form.external_authors }}
+      </div>
+      <div class="form-comments">
+        {{ form.elements.publication_concept_submit_form.comments_requests_optional }}
+      </div>
+      <div class="attachments">
+        {{ form.elements.publication_concept_submit_form.attachments_optional }}
+      </div>
+      <div class="row button-actions">
+        <div class="col-lg-2 col-md-3 col-sm-12 cancel-btn">
+          {{ form.elements.publication_concept_submit_form.cancel_button }}
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-12 submit-btn">
+          {{ form.elements.publication_concept_submit_form.actions_01 }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

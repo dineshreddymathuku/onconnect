@@ -1,0 +1,115 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+:root {
+/* font font-family */
+  --base-font:"noto-sans",sans-serif;
+/* background-colors*/
+  --footer-bg-color: #00004E;
+  --button-bg-color:#003FE2;
+  --tool-tip-bg-color:#293033;
+  --abstract-bg-color:#4C5459;
+  --manuscript-bg-color:#335BC3;
+  --oralpresentation-bg-color:#5E4594;
+  --plainlanguagesummary-bg-color:#AE465E;
+  --poster-bg-color:#34706F;
+/* link text colors */
+  --link-color-text-1:#0000C9;
+  --link-color-text-2:#003FE2;
+/* button text colors */
+  --button-color-text:#003FE2;
+/* text colors */
+  --color-white:#fff;
+/* heading font sizes */
+  --heading-h1-fontsize: 60px;
+  --heading-h2-fontsize: 48px;
+  --heading-h3-fontsize: 32px;
+  --heading-h4-fontsize: 24px;
+  --heading-h5-fontsize: 20px;
+/* sub-title font sizes */
+  --subtitle-1-fontsize: 18px;
+  --subtitle-2-fontsize: 15px;
+/* body font sizes */
+  --body-1-fontsize: 16px;
+  --body-2-fontsize: 18px;
+  --body-3-fontsize: 14px;
+  /*caption font size*/
+  --caption-fontsize: 12px;
+  /*over-line font size*/
+  --overline-1-fontsize:14px;
+  --overline-2-fontsize: 12px;
+  /*screen widths*/
+  --screen-lg: 1440px;
+}
+html,
+body{
+  font-family: var(--base-font) !important;
+  font-family: "noto-sans",sans-serif !important;
+  font-size: var(--body-1-fontsize);
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-overflow-scrolling: touch;
+  background: #F2F2F8;
+}
+.ui-widget{
+  font-family:'Noto Sans',sans-serif !important;
+}
+h1{
+  font-size: var(--heading-h1-fontsize);
+  font-size: 60px;
+}
+h2{
+  font-size: var(--heading-h2-fontsize);
+  font-size: 48px;
+}
+h3{
+  font-size: var(--heading-h3-fontsize);
+  font-size: 32px;
+}
+h4{
+  font-size: var(--heading-h4-fontsize);
+  font-size: 24px;
+}
+h5{
+  font-size: var(--heading-h5-fontsize);
+  font-size: 20px;
+}
+a{
+  color: var(--link-color-text-1);
+  color: #0000C9;
+  text-decoration: none;
+}
+a:focus{
+  outline: none;
+}
+a:hover{
+  text-decoration: none;
+}
+.col-lg-9,
+.col-lg-4{
+  padding: 0;
+}
+body.modal-open {
+    overflow: hidden;
+}
+img{
+  width: auto;
+  height: auto;
+}
+/* mobile design for header menu */
+@media (max-width:400px){
+  body{
+    padding: 0 !important;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+.latest-publications-inner,
+section.metrics-db{
+  padding: 0 112px;
+}
+

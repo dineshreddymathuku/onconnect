@@ -1,0 +1,32 @@
+core: 8.x
+core_version_requirement: ^8 || ^9
+type: theme
+base theme: bootstrap
+name: 'Pfizer Onconnect'
+description: 'Bootstrap subtheme for project "Brand Pfizer Onconnect".'
+package: 'Bootstrap'
+
+regions:
+  navbar_sitebranding: 'Site branding'
+  navbar_primary: 'Primary menu'
+  navbar_secondary: 'Secondary menu'
+  header_top: 'Top Bar'
+  header: 'Header'
+  top_banner: 'Top Banner'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content_top: 'Content Top'
+  content: 'Content'
+  content_full: 'Content full width'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer_1: 'Footer-1'
+  footer_2: 'Footer-2'
+  footer_3: 'Footer-3'
+  footer_4: 'Footer-4'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+
+libraries-extend:
+  bootstrap/framework:
+    - 'onconnect/framework'

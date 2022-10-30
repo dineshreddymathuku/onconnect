@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * Primary menu module.
+ */
+
+/**
+ * Implements hook_theme().
+ */

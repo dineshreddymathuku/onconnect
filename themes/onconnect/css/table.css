@@ -1,0 +1,32 @@
+.scientific_platform .panel-body table {
+  background-color: transparent;
+  max-width: 808px;
+  width: 100%;
+  border: none;
+  margin: 0px;
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+}
+.scientific_platform .panel-body table th {
+  padding: 12px 8px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  color: #293033;
+}
+.scientific_platform .panel-body table td,
+th {
+  border: none;
+  vertical-align: baseline;
+}
+.scientific_platform .panel-body table td {
+  padding: 12px 25px 8px;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  color: #293033;
+}
+.scientific_platform .panel-body table tbody tr {
+  border-top: 1px #c4c4c4 solid;
+}

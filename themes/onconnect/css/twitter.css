@@ -1,0 +1,60 @@
+.SandboxRoot.env-bp-970 .timeline-Tweet-actions,
+.SandboxRoot.env-bp-970 .timeline-Tweet-media,
+.SandboxRoot.env-bp-970 .timeline-Tweet-text {
+  margin-left: 0 !important;
+  font-size: 18px;
+  line-height: 140%;
+}
+.panel-body {
+  padding: 86px 0 0 0 !important;
+}
+#block-twitter {
+  background: #f2f2f8;
+}
+.text-center {
+  border-top: 1px solid #00048420;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.2px;
+  display: block;
+  max-width: 90%;
+  margin: 0 auto;
+  margin-bottom: 70px !important;
+}
+#twt-smore {
+  position: relative;
+  top: -13px;
+  padding: 12px;
+  background: #f2f2f8;
+  color: #003fe2;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 400;
+}
+.timeline-TweetList-smaller-desktop {
+  gap: 15px;
+}
+.timeline-Widget-smaller-desktop {
+  padding: 0 20px;
+}
+.timeline-TweetList-tweet-smaller-desktop {
+  width: 317px;
+  max-width: 100%;
+}
+@media (max-width: 1023px) {
+  .panel-body {
+    padding: 45px 0 0 0 !important;
+  }
+  .text-center {
+    margin-top: -20px !important;
+  }
+}
+@media (max-width: 767px) {
+  .text-center {
+    display:none;
+    margin-bottom: 0 !important;
+  }
+  .panel-body {
+    padding: 45px 0 0 0 !important;
+  }
+}

@@ -1,0 +1,184 @@
+.news-featured-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -moz-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  -o-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+.news-description {
+  background: url("/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/news-banner.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 0px 8px 0px 0px;
+  color: var(--color-white);
+  color: #fff;
+  padding: 81px 0 90px 113px;
+  flex: 0 0 50%;
+  flex-grow: 1;
+}
+.news-featured-container h2 {
+  font-size: var(--heading-h3-fontsize);
+  font-size: 32px;
+  line-height: 150%;
+}
+.news-description span {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  font-weight: 700;
+}
+.news-description p {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
+  max-width: 70%;
+}
+.onconnect-mobile {
+  display: none;
+}
+.onconnect-desktop {
+  display: block;
+  margin: 0;
+  padding-bottom: 57px;
+  white-space: nowrap;
+  width: 342px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+}
+.news-featured-image {
+  padding-top: 126px;
+  position: relative;
+  left: auto;
+  right: 115px;
+  flex: 0 0 50%;
+}
+.news-featured-image img {
+  border-radius: 10px;
+  height: auto;
+  width: 100%;
+  display: block;
+  max-width: 100%;
+}
+.news-featured-container {
+  position: relative;
+  top: -40px;
+}
+@media (max-width: 1300px) {
+  .onconnect-desktop {
+    display: block;
+    margin: 0;
+    padding-bottom: 37px;
+  }
+  .news-description {
+    padding: 40px 55px 0;
+  }
+  .news-featured-image {
+    right: 100px;
+    margin-right: -36px;
+  }
+}
+@media (max-width: 1023px) {
+  .onconnect-mobile {
+    display: block;
+    margin: 0;
+    line-height: 1.5;
+    letter-spacing: normal;
+    font-weight: normal;
+    font-size: 28px;
+    white-space: nowrap;
+    width: 290px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .news-featured-image img{
+    border-radius: 5px
+  }
+  .news-description {
+    background: none;
+    padding: 50px 0 16px;
+  }
+  .news-description p {
+    max-width: 100%;
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  .news-description span {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.23;
+  }
+  .news-featured-container {
+    background: url("/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/news-banner.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 0px 8px 0px 0px;
+    color: var(--color-white);
+    color: #fff;
+    padding: 37px 25px 0;
+  }
+  .news-featured-image {
+    padding: 35px 64px 47px 0;
+    position: inherit;
+    margin: 0;
+  }
+  .news-featured-wrapper {
+    -webkit-flex-direction: revert;
+    -moz-flex-direction: revert;
+    -ms-flex-direction: revert;
+    -o-flex-direction: revert;
+    flex-direction: revert;
+  }
+  .onconnect-desktop {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .news-featured-wrapper {
+    display: block;
+  }
+  .onconnect-desktop {
+    display: none;
+  }
+  .news-description {
+    background: none;
+    padding: 0;
+  }
+  .news-featured-container {
+    border-radius: 0px;
+    padding: 40px 32px;
+  }
+  .news-featured-image {
+    position: unset;
+    padding: 26px 0 16px;
+    margin: 0;
+  }
+  .news-description p {
+    max-width: 100%;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 160%;
+  }
+}
+/* css for news section IE */
+@media \0screen\,screen\9 {
+  .news-featured-image img {
+    width: auto;
+  }
+}
+@media screen and (min-width: 0\0) {
+  .news-featured-image img {
+    width: auto;
+  }
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .news-featured-image img {
+    width: auto;
+  }
+}

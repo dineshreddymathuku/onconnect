@@ -1,0 +1,41 @@
+framework:
+  css:
+    theme:
+      https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css: { }
+      https://use.typekit.net/bvg4ezy.css: { }
+      css/custom.css: { }
+      css/footer.css: { }
+      css/banner.css: { }
+      css/global.css: { }
+      css/listview.css: { }
+      css/header.css: { }
+      css/news.css: { }
+      css/news-details.css: { }
+      css/popup.css: { }
+      css/social-media.css: { }
+      css/twitter.css: { }
+      css/metrics.css: { }
+      css/scientific-platform.css: { }
+      css/disease-area.css: { }
+      css/congress.css: { }
+      css/mobilemenu.css: { }
+      css/news-home.css: { }
+      css/search.css: { }
+      css/form.css: { }
+  js:
+    https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js: { }
+    js/onconnect.js: { }
+    js/header.js: { }
+    js/mobilemenu.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+publications:
+  js:
+    js/publication.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

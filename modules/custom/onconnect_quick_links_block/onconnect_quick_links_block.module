@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Quick link module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function onconnect_quick_links_block_theme() {
+  return [
+    'diseases_quick_links' => [
+      'variables' => [
+        'data' => NULL,
+        'hoverDashboard' => NULL,
+      ],
+      'template' => 'diseases_quick_links',
+    ],
+    'congresses_quick_links' => [
+      'variables' => [
+        'data' => NULL,
+        'hoverDashboard' => NULL,
+      ],
+      'template' => 'congresses_quick_links',
+    ],
+    'static_details_quick_links' => [
+      'variables' => [
+        'data' => NULL,
+        'hoverDashboard' => NULL,
+      ],
+      'template' => 'static_details_quick_links',
+    ],
+  ];
+}

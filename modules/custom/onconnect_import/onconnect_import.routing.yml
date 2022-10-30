@@ -1,0 +1,31 @@
+onconnect_import.import_data:
+  path: '/admin/config/onconnect_import/sheet/import'
+  defaults:
+    _title: 'Upload Publications'
+    _form: '\Drupal\onconnect_import\Form\ImportexcelForm'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_import.import_metrics:
+  path: '/admin/config/onconnect_import/sheet/import-metrics'
+  defaults:
+    _title: 'Upload Metrics'
+    _form: '\Drupal\onconnect_import\Form\ImportMetricsForm'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_import.publich_nodes:
+  path: '/admin/config/onconnect_import/publish_nodes'
+  defaults:
+    _title: 'Publish nodes'
+    _form: '\Drupal\onconnect_import\Form\PublishNodesForm'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_import.delete_nodes:
+  path: '/admin/config/onconnect_import/delete_nodes'
+  defaults:
+    _title: 'Delete nodes'
+    _form: '\Drupal\onconnect_import\Form\DeleteNodesForm'
+  requirements:
+    _permission: 'administer onconnect import'

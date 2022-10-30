@@ -1,0 +1,7 @@
+onconnect_metrics.admin_settings:
+  path: '/admin/config/onconnect_metrics'
+  defaults:
+    _form: '\Drupal\onconnect_metrics\Form\MetricsSettingsForm'
+    _title: 'Onconnect Metrics Configuration'
+  requirements:
+    _permission: 'administer site configuration'

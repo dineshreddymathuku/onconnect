@@ -1,0 +1,5 @@
+name: Oncology Metrics Config Form
+type: module
+description: 'Custom development for oncology metrics config form.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

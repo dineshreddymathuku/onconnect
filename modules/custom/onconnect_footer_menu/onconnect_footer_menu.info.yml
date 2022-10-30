@@ -1,0 +1,5 @@
+name: Oncology Footer Menu
+type: module
+description: 'Custom development for oncology footer menu.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

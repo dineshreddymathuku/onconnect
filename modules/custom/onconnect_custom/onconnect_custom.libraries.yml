@@ -1,0 +1,6 @@
+publications:
+  js:
+    js/publications.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal

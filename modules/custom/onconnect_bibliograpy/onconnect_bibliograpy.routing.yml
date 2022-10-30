@@ -1,0 +1,25 @@
+onconnect_bibliograpy.add:
+  path: '/add/bibliograpy/{nid}'
+  defaults:
+    _controller: '\Drupal\onconnect_bibliograpy\Controller\Bibliograpy::add'
+  methods:  [GET]
+  requirements:
+    _role: 'authenticated'
+
+onconnect_bibliograpy.remove:
+  path: '/remove/bibliograpy/{nid}'
+  defaults:
+    _controller: '\Drupal\onconnect_bibliograpy\Controller\Bibliograpy::remove'
+  methods:  [GET]
+  requirements:
+    _role: 'authenticated'
+
+onconnect_bibliograpy.list:
+  path: '/my/bibliograpy'
+  defaults:
+    _controller: '\Drupal\onconnect_bibliograpy\Controller\Bibliograpy::list'
+    _title: 'Bibliography'
+  requirements:
+    _role: 'authenticated'
+  options:
+    no_cache: TRUE

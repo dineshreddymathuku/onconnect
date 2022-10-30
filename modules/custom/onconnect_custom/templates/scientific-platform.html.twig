@@ -1,0 +1,17 @@
+<div class="top-banner-block">
+  <div class="head">
+    <div class="head-title-block">
+      <span class="bookmark">Scientific Platform</span>
+      <h2 class="title">{{ data.title }}</h2>
+      {% if data.updated %}
+        <div class="last-updated">
+          {{ "Last Updated: "|t }} {{ data.updated }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="download-btn"><a href="/platform/download/{{ data.nid }}"><img
+          src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/download_blue.svg"
+          alt="download-icon">Download Platform <span class="pdf-download"></span></a>
+    </div>
+  </div>
+</div>

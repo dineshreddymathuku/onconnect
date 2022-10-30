@@ -1,0 +1,18 @@
+@mixin button {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: $color--theme;
+    border: 1px solid $color--theme;
+    border-radius: 80px;
+    padding: 0.75rem 1rem;
+    display: inline-block;
+    background-color: transparent;
+
+    &:hover {
+        background-color: $color--theme !important;
+        color: $color--white;
+        border: 1px solid $color--theme;
+    }
+}

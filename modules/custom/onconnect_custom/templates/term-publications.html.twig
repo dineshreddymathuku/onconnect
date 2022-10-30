@@ -1,0 +1,602 @@
+<div class="latest-publications" id="latest-publications">
+  <div class="latest-publications-inner">
+    {% set site_url = path("<current>") %}
+    {% if vocabularyID == "congresses" %}
+      <div class="congress-filters-title">{{ "Congress Materials"|t }}</div>
+    {% endif %}
+    <div class="term-publicatations publications-view">
+      <form action="{{ site_url }}" id="publications-form">
+        <div class="filters">
+          <div class="materials-wrapper">
+            {% set site_url = path("<current>") %}
+            {% if vocabularyID == "congresses" %}
+              <div class="congress-filters-title-mobile">{{ "Congress Materials"|t }}</div>
+            {% endif %}
+            <span class="filter-icon"><img
+                src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-mobile.svg"
+                alt="filter-icon">
+              <span>Filters</span>
+          </span>
+          </div>
+          <ul class="filers-ul">
+            {% if otherIndicatons|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Other Indications"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-other-indications filter-dropdown-type">
+                  {% for filterTerm in filterTerms %}
+
+                    <li>
+                      <input {{ filterTerm.checked }} type="checkbox" id="{{ filterTerm.value }}"
+                                                      name="disease-typed-{{ filterTerm.value }}"
+                                                      value="{{ filterTerm.id }}"
+                                                      class="{{ filterTerm.value }} check-box"/>
+                      <label for="{{ filterTerm.value }}">{{ filterTerm.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if otherCongresses|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Other Congresses"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-other-congresses filter-dropdown-type">
+                  {% for filterTerm in filterTerms %}
+                    <li>
+                      <input {{ filterTerm.checked }} type="checkbox" id="{{ filterTerm.value }}"
+                                                      name="congress-typed-{{ filterTerm.value }}"
+                                                      value="{{ filterTerm.id }}"
+                                                      class="{{ filterTerm.value }} check-box"/>
+                      <label for="{{ filterTerm.value }}">{{ filterTerm.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            <li class="filter-type-list filter-sort-list">
+              <span class="filter-sort">
+                <span>{{ "Sort"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+              <ul class="filter-dropdown-type filter-dropdown-sort">
+                {% for sortKey, sortData in sort %}
+                  <li>
+                    <input {{ sortData.checked }} type="radio" id="{{ sortData.value }}" name="sort"
+                                                  value="{{ sortKey }}" class="{{ sortData.value }} form__radio-input"/>
+                    <label class="form__radio-label" for="{{ sortData.value }}">{{ sortData.value }} <span
+                        class="form__radio-button"></span></label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% if types|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Type"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-type">
+                  {% for publication_type in types %}
+                    <li>
+                      <input {{ publication_type.checked }} type="checkbox" id="{{ publication_type.value }}"
+                                                            name="type-{{ publication_type.value }}"
+                                                            value="{{ publication_type.id }}"
+                                                            class="{{ publication_type.value }} check-box"/>
+                      <label for="{{ publication_type.value }}">{{ publication_type.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if diseaseAreas|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Product / Asset"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-type">
+                  {% for diseaseArea in diseaseAreas %}
+                    <li class="custom-checkbox">
+                      <input {{ diseaseArea.checked }} type="checkbox" id="{{ diseaseArea.value }}"
+                                                       name="product-{{ diseaseArea.value }}"
+                                                       value="{{ diseaseArea.id }}"
+                                                       class="{{ diseaseArea.value }} check-box"/>
+                      <label for="{{ diseaseArea.value }}">{{ diseaseArea.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+            {% endif %}
+            {% if studies|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Study"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-type">
+                  {% for study in studies %}
+                    <li>
+                      <input {{ study.checked }} type="checkbox" id="{{ study.value }}" name="study-{{ study.value }}"
+                                                 value="{{ study.value }}"
+                                                 class="{{ study.value }} check-box"/>
+                      <label for="{{ study.value }}">{{ study.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if congresses|length > 0 %}
+              <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Congress"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+                <ul class="filter-dropdown-type">
+                  {% for congress in congresses %}
+                    <li class="custom-checkbox">
+                      <input {{ congress.checked }} type="checkbox" id="{{ congress.value }}"
+                                                    name="congress-{{ congress.value }}"
+                                                    value="{{ congress.id }}" class="{{ congress.value }} check-box"/>
+                      <label for="{{ congress.value }}">{{ congress.value }}</label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+            {% if indications|length > 0 %}
+            <li class="filter-type-list">
+              <span class="filter-type">
+                <span>{{ "Indication"|t }}</span>
+                <img class="down-arrow"
+                     src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                     alt="down-arrow">
+              </span>
+              <ul class="filter-dropdown-type">
+                {% for indication in indications %}
+                  <li>
+                    <input type="checkbox" {{ indication.checked }} id="{{ indication.value }}"
+                           name="indication-{{ indication.value }}"
+                           value="{{ indication.id }}" class="{{ indication.value }} check-box"/>
+                    <label for="{{ indication.value }}">{{ indication.value }}</label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+          {% endif %}
+          <input class="filters-submit" type="submit" value="Submit">
+        </div>
+      </form>
+      <div class="count">{% if limit > count %}{{ count }}{% else %} {{ limit }} {% endif %} {{ "items"|t }}</div>
+      <div class="grid-icon">
+      <span class="grid hidden"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/grid.svg"
+                                     alt="grid-icon"></span>
+        <span class="list"><img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list.svg"
+                                alt="list-icon"></span>
+      </div>
+    </div>
+    {% if filters %}
+      <div class="filters-selected">
+        <ul>
+          {% if paramLinks %}
+
+            {% for paramKey, paramValue in paramLinks %}
+
+              <li class="filters-links"
+                  data-value="{{ paramKey }}={{ paramValue.value|replace({' ': '+'}) }}">{{ paramValue.label }}<img
+                  src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-close.svg"
+                  alt="filter-close-icon" style="cursor: pointer;"></li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+
+        {% if paramLinks|length > 0 %}
+          {% set class='clear-all' %} {% else %}{% set class='clear-all hidden' %}{% endif %}
+        <a class="{{ class }}" href="{{ path('<current>') }}">{{ "Clear all" }}</a>
+
+      </div>
+    {% endif %}
+    {# mobile filters accordion design  #}
+    <div class="term-popup" id="popup">
+      <form action="{{ site_url }}" id="publications-form">
+          <span class="filter-close-icon"><img
+              src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-close.svg"
+              alt="close-icon">
+          </span>
+        {% set site_url = path("<current>") %}
+        <ul class="filers-ul">
+          <div class="panel-group filers-ul" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="filter-list ilter-list-sort" role="tab" id="headingOne">
+                <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                   href="#collapseFilterOne" aria-expanded="true" aria-controls="collapseFilterOne">
+                  <span>{{ "Sort"|t }}</span>
+                  <span>
+                    <img class="down-arrow"
+                         src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                         alt="down-arrow">
+                  </span>
+                </a>
+              </div>
+              <div id="collapseFilterOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body form-submit">
+                  {% for sortKey, sortData in sort %}
+                    <div>
+                      <input {{ sortData.checked }} type="radio" id="{{ sortData.value }}" name="sort"
+                                                    value="{{ sortKey }}"
+                                                    class="{{ sortData.value }} form__radio-input"/>
+                      <label class="form__radio-label" for="{{ sortData.value }}">{{ sortData.value }} <span
+                          class="form__radio-button"></span></label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% if otherCongresses|length > 0 %}
+              <div class="filter-list" role="tab" id="headingOtherCong">
+                <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                   href="#collapseFilterOtherCong" aria-expanded="false" aria-controls="collapseFilterOtherCong">
+                  <span>{{ "Other Congresses"|t }}</span>
+                  <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                  </span>
+                </a>
+              </div>
+              <div id="collapseFilterOtherCong" class="panel-collapse collapse" role="tabpanel"
+                   aria-labelledby="headingOtherCong">
+                <div class="panel-body form-submit">
+                  {% for filterTerm in filterTerms %}
+                    <li>
+                      <input {{ filterTerm.checked }} type="checkbox" id="{{ filterTerm.value }}"
+                                                      name="congress-typed-{{ filterTerm.value }}"
+                                                      value="{{ filterTerm.id }}"
+                                                      class="{{ filterTerm.value }} check-box"/>
+                      <label for="{{ filterTerm.value }}">{{ filterTerm.value }}</label>
+                    </li>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+            {% if otherIndicatons|length > 0 %}
+              <div class="filter-list" role="tab" id="headingOther">
+                <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                   href="#collapseFilterOther" aria-expanded="false" aria-controls="collapseFilterOther">
+                  <span>{{ "Other Indications"|t }}</span>
+                  <span>
+                        <img class="down-arrow"
+                             src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                             alt="down-arrow">
+                    </span>
+                </a>
+              </div>
+              <div id="collapseFilterOther" class="panel-collapse collapse" role="tabpanel"
+                   aria-labelledby="headingOther">
+                <div class="panel-body form-submit">
+                  {% for filterTerm in filterTerms %}
+                    <div>
+                      <input {{ filterTerm.checked }} type="checkbox" id="{{ filterTerm.value }}"
+                                                      name="disease-typed-{{ filterTerm.value }}"
+                                                      value="{{ filterTerm.id }}"
+                                                      class="{{ filterTerm.value }} check-box"/>
+                      <label for="{{ filterTerm.value }}">{{ filterTerm.value }}</label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+            {% if types|length > 0 %}
+              <div class="panel panel-default">
+                <div class="filter-list" role="tab" id="headingOne">
+                  <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                     href="#collapseFilterTwo" aria-expanded="false" aria-controls="collapseFilterTwo">
+                    <span>{{ "Type"|t }}</span>
+                    <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                  </span>
+                  </a>
+                </div>
+                <div id="collapseFilterTwo" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="headingOne">
+                  <div class="panel-body form-submit">
+                    {% for publication_type in types %}
+                      <div>
+                        <input {{ publication_type.checked }} type="checkbox" id="{{ publication_type.value }}"
+                                                              name="type-{{ publication_type.value }}"
+                                                              value="{{ publication_type.id }}"
+                                                              class="{{ publication_type.value }} check-box"/>
+                        <label for="{{ publication_type.value }}">{{ publication_type.value }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if diseaseAreas|length > 0 %}
+              <div class="panel panel-default">
+                <div class="filter-list" role="tab" id="headingOne">
+                  <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                     href="#collapseFilterThree" aria-expanded="false" aria-controls="collapseFilterThree">
+                    <span>{{ "Product / Asset"|t }}</span>
+                    <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                  </span>
+                  </a>
+                </div>
+                <div id="collapseFilterThree" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="headingOne">
+                  <div class="panel-body form-submit">
+                    {% for diseaseArea in diseaseAreas %}
+                      <div class="custom-checkbox">
+                        <input {{ diseaseArea.checked }} type="checkbox" id="{{ diseaseArea.value }}"
+                                                         name="product-{{ diseaseArea.value }}"
+                                                         value="{{ diseaseArea.id }}"
+                                                         class="{{ diseaseArea.value }} check-box "/>
+                        <label for="{{ diseaseArea.id }}">{{ diseaseArea.value }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if studies|length > 0 %}
+              <div class="panel panel-default">
+                <div class="filter-list" role="tab" id="headingOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilterFive"
+                     aria-expanded="false" aria-controls="collapseFilterFive">
+                    <span>{{ "Study"|t }}</span>
+                    <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                    </span>
+                  </a>
+                </div>
+                <div id="collapseFilterFive" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="headingOne">
+                  <div class="panel-body form-submit">
+                    {% for study in studies %}
+                      <div>
+                        <input {{ study.checked }} type="checkbox" id="{{ study.value }}" name="study-{{ study.value }}"
+                                                   value="{{ study.value }}"
+                                                   class="{{ study.value }} check-box"/>
+                        <label for="{{ study.value }}">{{ study.value }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if congresses|length > 0 %}
+              <div class="panel panel-default">
+                <div class="filter-list" role="tab" id="headingOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilterSeven"
+                     aria-expanded="false" aria-controls="collapseFilterSeven">
+                    <span>{{ "Congress"|t }}</span>
+                    <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                  </span>
+                  </a>
+                </div>
+                <div id="collapseFilterSeven" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="headingOne">
+                  <div class="panel-body form-submit">
+                    {% for congress in congresses %}
+                      <div class="custom-checkbox">
+                        <input {{ congress.checked }} type="checkbox" id="{{ congress.value }}"
+                                                      name="congress-{{ congress.value }}"
+                                                      value="{{ congress.id }}" class="{{ congress.value }} check-box"/>
+                        <label for="{{ congress.id }}">{{ congress.value }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if indications|length > 0 %}
+              <div class="panel panel-default">
+                <div class="filter-list" role="tab" id="headingOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilterEight"
+                     aria-expanded="false" aria-controls="collapseFilterEight">
+                    <span>{{ "Indication"|t }}</span>
+                    <span>
+                      <img class="down-arrow"
+                           src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/down-arrow.svg"
+                           alt="down-arrow">
+                  </span>
+                  </a>
+                </div>
+                <div id="collapseFilterEight" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="headingOne">
+                  <div class="panel-body form-submit">
+                    {% for indication in indications %}
+                      <div>
+                        <input type="checkbox" {{ indication.checked }} id="{{ indication.value }}"
+                               name="indication-{{ indication.value }}"
+                               value="{{ indication.id }}" class="{{ indication.value }} check-box"/>
+                        <label for="{{ indication.value }}">{{ indication.value }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <input type="hidden" name="pagerCount" id="pagerCount" value="{{ pagerCount }}"/>
+          <input class="filters-submit" type="submit" value="Submit">
+      </form>
+      <div
+        class="count-mobile">{{ "Show "|t }}{% if not bibliography %}{% if limit > count %}{{ count }}{% else %} {{ limit }} {% endif %}{% else %} {{ count }} {% endif %} {{ "results"|t }}</div>
+    </div>
+    <div class="publicataions-wrapper">
+      <div class="publications-grid">
+        {% for publication in data %}
+          <div class="publications-grid-data">
+            <div class="publications-{{ publication.publication_type|replace({' ': '-'})|lower }}">
+            <span class="bookmark"><a class="use-ajax"
+                                      id="modal-popup-scroll"
+                                      data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                                      data-dialog-type="modal"
+                                      href="{{ publication.alias }}">{{ publication.publication_type }}</a></span>
+              <span data-nid="{{ publication.nid }}" class="menu-icon menu-icon-grid">
+              <a href="#" data-nid="{{ publication.nid }}" aria-label="list-icon">
+                <img src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list_icon.svg"
+                     alt="list-view-icon">
+              </a>
+            </span>
+              <div id="menu-link-grid-{{ publication.nid }}" class="menu-link-grid-dropdown hidden">
+                <ul class="list-unstyled dropdown-grid">
+                  {% set roles = user.getroles(TRUE) %}
+
+                  {% if ('self_service_editor' in roles) or ('self_service_manager' in roles) or ('self_service_publisher' in roles) %}
+                    <li>
+                      <a href="/node/{{ publication.nid }}/edit">{{ "Edit"|t }}</a>
+                    </li>
+                  {% endif %}
+                  <li>
+                    <a
+                      class="bibliograpy-links bibliograpy-links-{{ publication.nid }} {{ publication.checkBibliograpy.class }}"
+                      data-nid="{{ publication.nid }}" id="publication-{{ publication.nid }}" onclick="return false;"
+                      href="{{ publication.checkBibliograpy.link }}">{{ publication.checkBibliograpy.title|t }}</a>
+                  </li>
+                  <li>
+                    <a class="use-ajax" href="/node/{{ publication.nid }}"
+                       data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                       data-dialog-type="modal">{{ "Open"|t }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="publications-date">
+              {% if publication.latest %}
+                <span class="latest"><img
+                    src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/Ellipse.svg" alt="dot-icon">
+              </span>
+              {% endif %}
+              <span class="date">{{ publication.datePublished }}</span>
+            </div>
+            <div class="publications-description grid-text"> {{ publication.description|raw }}</div>
+            <div class="publication-journal-container clearfix pt-3">
+              {% if publication.journal %}
+                <div class="publication-journal">
+                  <div class="grid-journal-title">{{ "Journal"|t }}</div>
+                  <div class="grid-journal">{{ publication.journal|t }}</div>
+                </div>
+              {% endif %}
+              {% if publication.indication %}
+                <div class="publication-indication-grid">
+                  <div class="grid-indication-title"> {{ "Indication"|t }}</div>
+                  <div class="grid-indication"> {{ publication.indication|t }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="publications-list hidden">
+      {% for publication in data %}
+        <div class="publications-list-data row">
+          <div class="col-lg-3 col-md-3 publications-{{ publication.publication_type|replace({' ': '-'})|lower }}">
+          <span class="bookmark"><a class="use-ajax" id="modal-popup-scroll-list"
+                                    data-dialog-options="{&quot;width&quot;:488,&quot;position&quot;:&quot;right&quot;}"
+                                    data-dialog-type="modal"
+                                    href="{{ publication.alias }}">{{ publication.publication_type }}</a></span>
+            <div class="publications-date">
+              {% if publication.latest %}
+                <span class="latest"><img
+                    src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/Ellipse.svg" alt="dot-icon">
+            </span>
+              {% endif %}
+              <span class="date">{{ publication.datePublished }}</span>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-5">
+            <span class="list-title">title</span>
+            <div class="publications-description list-text"><p>{{ publication.description|raw }}</p></div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 journal-space">
+                {% if publication.journal %}
+                  <div class="list-journal-title">{{ "Journal"|t }}</div>
+                  <div class="publication-journal">{{ publication.journal|t }}</div>
+                {% endif %}
+              </div>
+              <div class="col-lg-6 col-md-6 journal-space">
+                {% if publication.indication %}
+                  <div class="list-indication-title"> {{ "Indication"|t }}</div>
+                  <div class="publication-indication">{{ publication.indication|t }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div data-nid="{{ publication.nid }}" class="col-lg-2 col-md-2 menu-icon menu-icon-list"><img
+              src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/list_icon.svg"
+              alt="list-view-icon">
+            <div id="menu-link-list-{{ publication.nid }}" class="menu-link-list-dropdown hidden">
+              <ul class="list-unstyled dropdown-list">
+                {% set roles = user.getroles(TRUE) %}
+                {% if ('self_service_editor' in roles) or ('self_service_manager' in roles) or ('self_service_publisher' in roles) %}
+                  <li>
+                    <a href="/node/{{ publication.nid }}/edit">{{ "Edit"|t }}</a>
+                  </li>
+                {% endif %}
+                <li>
+                  <a
+                    class="bibliograpy-links bibliograpy-links-{{ publication.nid }} {{ publication.checkBibliograpy.class }}"
+                    data-nid="{{ publication.nid }}"
+                    id="{{ publication.checkBibliograpy.class }}-{{ publication.nid }}" onclick="return false;"
+                    href="{{ publication.checkBibliograpy.link }}">{{ publication.checkBibliograpy.title|t }}</a>
+                </li>
+                <li>
+                  <a href="/node/{{ publication.nid }}">{{ "Open"|t }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if limit >= count %}
+      {% set classes ='showmore-btn hide' %}
+
+    {% endif %}
+    <div class="showCount {{ classes }}">Showing {% if limit > count %}{{ count }}{% else %} {{ limit }} {% endif %}
+      of {{ count }}</div>
+    <div class="showmore-btn {{ classes }}">
+      <a href="?pagerCount={{ pagerCount }}" pager="{{ pagerCount }}" show="{{ show }}" offset="{{ offset }}"
+         limit="{{ limit }}" tid="{{ tid }}"
+         vid="{{ vid }}"
+         total={{ count }}>Show more</a></div>
+
+  </div>
+</div>

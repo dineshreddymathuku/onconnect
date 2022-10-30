@@ -1,0 +1,347 @@
+<?php
+
+/**
+ * @file
+ * OnConnect custom module.
+ */
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+/**
+ * Implements hook_theme().
+ */
+function onconnect_custom_theme() {
+  return [
+    'metrics_dashboard' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'metricsdashboard',
+    ],
+    'metrics_dashboard_top' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'metricsdashboarddata',
+    ],
+    'resources' => [
+      'variables' => [
+        'attachments' => NULL,
+      ],
+      'template' => 'resources',
+    ],
+    'publications' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'publications',
+    ],
+    'term_publications' => [
+      'variables' => [
+        'data' => NULL,
+        'sort' => NULL,
+        'count' => NULL,
+        'types' => NULL,
+        'filters' => NULL,
+        'studies' => NULL,
+        'congresses' => NULL,
+        'diseaseAreas' => NULL,
+        'indications' => NULL,
+        'paramLinks' => NULL,
+        'pager' => NULL,
+        'pagerCount' => NULL,
+        'tid' => NULL,
+        'vid' => NULL,
+        'offset' => NULL,
+        'limit' => NULL,
+        'show' => NULL,
+        'bibliography' => NULL,
+        'vocabularyID' => NULL,
+        'filterTerms' => NULL,
+        'otherIndicatons' => NULL,
+        'otherCongresses' => NULL,
+        'relatedDiseases' => NULL,
+      ],
+      'template' => 'term-publications',
+    ],
+    'scientific_platform' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'scientific-platform',
+    ],
+    'disease_areas' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'disease-areas',
+    ],
+    'congresses' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'congresses',
+    ],
+    'publication_concept_form' => [
+      'render element' => 'form',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function onconnect_custom_node_presave(NodeInterface $node) {
+  if ($node->getType() == 'publication' && !$node->isNew()) {
+    $node->set("field_updated", 1);
+  }
+  if ($node->getType() == 'publication') {
+    $node->set("field_publication_type_parent", 'publication_type');
+    $related_disease = $node->field_related_disease_areas->getValue();
+    if (!empty($related_disease)) {
+      $node->set("field_related_disease_parent", 'disease_areas');
+    }
+    $related_congress = $node->field_related_to_congresses->getValue();
+    if (!empty($related_disease)) {
+      $node->set("field_related_congresses_parent", 'congresses');
+    }
+    if ($node->field_title_text->value && !$node->getTitle()) {
+      $title_text = strip_tags($node->field_title_text->value);
+      if (strlen($title_text) > 255) {
+        $title = substr($title_text, 0, 150);
+      }
+      else {
+        $title = $title_text;
+      }
+      $node->setTitle($title);
+    }
+  }
+  if ($node->getType() == 'onconnect_article') {
+    if ($node->field_title->value && !$node->getTitle()) {
+      $title_text = strip_tags($node->field_title->value);
+      if (strlen($title_text) > 255) {
+        $title = substr($title_text, 0, 150);
+      }
+      else {
+        $title = $title_text;
+      }
+      $node->setTitle($title);
+    }
+  }
+}
+
+/**
+ * Implements to calculate time difference in hours and minutes.
+ */
+function get_time_difference($timestamp = '') {
+  $difference = strtotime("now") - $timestamp;
+  $minutes = round($difference / 60);
+  $hours = 0;
+  if ($minutes > 60) {
+    $hours = round($minutes / 60);
+  }
+  if ($hours > 0) {
+    $minutes = $minutes - ($hours * 60);
+  }
+  if ($hours) {
+    return "$hours hr $minutes minutes ago";
+  }
+  return "$minutes minutes ago";
+}
+
+/**
+ * Implementation concept form.
+ */
+function onconnect_custom_preprocess_publication_concept_form(&$vars) {
+  $vars['publication_concept_form'] = \Drupal::formBuilder()
+    ->getForm('\Drupal\onconnect_custom\Form\PublicationConceptForm');
+  $vars['publication_concept_form']['proposal_type'] = [
+    'Congress and Manuscript',
+    'Manuscript only',
+    'Congress only',
+  ];
+}
+
+/**
+ * Implementation of hook preprocess form element.
+ */
+function onconnect_custom_preprocess_form_element(&$variables) {
+  if (isset($variables['element']['#label_classes'])) {
+    $variables['label']['#attributes']['class'] = $variables['element']['#label_classes'];
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function onconnect_custom_element_info_alter(array &$types) {
+  array_keys($types);
+  if (isset($types['datetime'])) {
+    $types['datetime']['#process'][] = '_set_datetime_defaults';
+  }
+}
+
+/**
+ * Set defaults for datetime fields.
+ */
+function _set_datetime_defaults($element) {
+  // Add placeholders to all datetime fields.
+  $element['date']['#attributes']['data-drupal-date-format'] = ['m/d/Y'];
+  $element['date']['#date_date_format'] = 'm/d/Y';
+  $element['date']['#attributes']['placeholder'] = ["MM-DD-YYY"];
+  $element['time']['#attributes']['placeholder'] = ["HH:MM:SS"];
+  return $element;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function onconnect_custom_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == "node_scientific_platform_edit_form" || $form_id == "node_scientific_platform_form" || $form_id == "node_publication_form" || $form_id == "node_publication_edit_form"|| $form_id == "node_static_detail_page_form" || $form_id == "node_static_detail_page_edit_form") {
+    $form['revision_log']['widget'][0]['value']['#required'] = FALSE;
+    $form['revision_log']['widget'][0]['value']['#default_value'] = "Updated on " . date("m/d/Y h:i:s", strtotime("now")) . " by " . \Drupal::currentUser()
+        ->getDisplayName();
+  }
+  $form['#attached']['library'][] = 'onconnect/custompublication';
+}
+
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for node entities.
+ */
+function onconnect_custom_node_view(array &$build, EntityInterface $node, EntityViewDisplayInterface $display, $view_mode) {
+  if ($node->bundle() == "scientific_platform") {
+    $currentUser = \Drupal::currentUser();
+    $nid = $node->id();
+    $currentUserLoad = User::load($currentUser->id());
+    $r = $currentUserLoad->getRoles();
+    if (count($r) > 1) {
+      $access = FALSE;
+    }
+    else {
+      $access = TRUE;
+    }
+    $editScientificPlatforms = $currentUserLoad->get("field_scientific_platform")
+      ->getValue();
+    $viewScientificPlatforms = $currentUserLoad->get("field_view_scientific_platform")
+      ->getValue();
+    if ($currentUserLoad->hasRole('restricted')) {
+      if ($editScientificPlatforms) {
+        foreach ($editScientificPlatforms as $editScientificPlatform) {
+          if ($nid == $editScientificPlatform['target_id']) {
+            $access = TRUE;
+            break;
+          }
+        }
+      }
+      if ($viewScientificPlatforms) {
+        foreach ($viewScientificPlatforms as $viewScientificPlatform) {
+          if ($nid == $viewScientificPlatform['target_id']) {
+            $access = TRUE;
+            break;
+          }
+        }
+      }
+    }
+    if ($currentUserLoad->hasRole('general') || $currentUserLoad->hasRole('self_service_editor')
+      || $currentUserLoad->hasRole('self_service_publisher') || $currentUserLoad->hasRole('self_service_viewer') || $currentUserLoad->hasRole('self_service_manager')) {
+      $access = TRUE;
+    }
+    if (!$access) {
+      throw new AccessDeniedHttpException();
+    }
+  }
+}
+
+/**
+ * Task Alter.
+ */
+function onconnect_custom_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  // Current node.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node) {
+    $nid = $node->id();
+  }
+  $routes = ['entity.node.canonical'];
+  // Current user details.
+  $currentUser = \Drupal::currentUser();
+  $currentUserLoad = User::load($currentUser->id());
+  // Scientific platform pages which have only view permission for restricted role.
+  $viewScientificPlatforms = $currentUserLoad->get("field_view_scientific_platform")
+    ->getValue();
+  if (!empty($viewScientificPlatforms)) {
+    foreach ($viewScientificPlatforms as $viewScientificPlatform) {
+      if ($currentUserLoad->hasRole('restricted') && ($nid == $viewScientificPlatform['target_id'])) {
+        if (in_array($route_name, $routes)) {
+          unset($data['tabs'][0]['entity.node.edit_form']);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function onconnect_custom_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
+  if ($element['#paragraph_type'] == 'attachments') {
+    if (!empty($element['subform']['field_resource_link'])) {
+      $parents_array = $element['subform']['#parents'];
+      $parents = array_shift($parents_array) . '[' . implode('][', $parents_array) . ']';
+      if (!empty($element['subform']['field_resource_link'])) {
+        $element['subform']['field_resource_link']['#states'] = [
+          'visible' => [
+            ':input[name="' . $parents . '[field_type]"]' => [
+              'value' => (string) 'link',
+            ],
+          ],
+        ];
+      }
+      if (!empty($element['subform']['field_upload_file'])) {
+        $element['subform']['field_upload_file']['#states'] = [
+          'visible' => [
+            ':input[name="' . $parents . '[field_type]"]' => [
+              'value' => (string) 'file',
+            ],
+          ],
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget__form_alter().
+ */
+function onconnect_custom_field_widget_paragraphs_form_alter(&$element, &$form_state, $context) {
+  if ($element['#paragraph_type'] == 'attachments') {
+    if (!empty($element['subform']['field_resource_link'])) {
+      $parents_array = $element['subform']['#parents'];
+      $parents = array_shift($parents_array) . '[' . implode('][', $parents_array) . ']';
+      if (!empty($element['subform']['field_resource_link'])) {
+        $element['subform']['field_resource_link']['#states'] = [
+          'visible' => [
+            ':input[name="' . $parents . '[field_type]"]' => [
+              'value' => (string) 'link',
+            ],
+          ],
+        ];
+      }
+      if (!empty($element['subform']['field_upload_file'])) {
+        $element['subform']['field_upload_file']['#states'] = [
+          'visible' => [
+            ':input[name="' . $parents . '[field_type]"]' => [
+              'value' => (string) 'file',
+            ],
+          ],
+        ];
+      }
+    }
+  }
+}

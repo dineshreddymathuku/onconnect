@@ -1,0 +1,64 @@
+# @file
+# .travis.yml - Travis CI Integration for Edison profile.
+#
+# Template provided by https://github.com/pfizer/edison_travis-8
+
+language: php
+
+sudo: required
+
+php:
+  - 7.4
+
+matrix:
+  fast_finish: true
+
+services:
+  - mysql
+
+# Skip tests for tags.
+if: tag IS blank
+
+notifications:
+  webhooks:
+    urls:
+      - https://smartsite.pfizersite.io/smartsite/api/v1/ci/notification/travis
+    on_start: always
+
+env:
+  global:
+    # Repo type.
+    - REPO_TYPE='profile'
+
+    # Composer /vendor folder location.
+    - COMPOSER_VENDOR_PATH="$HOME/.config/composer/vendor"
+
+    # The location of edison_travis package.
+    - EDISON_TRAVIS_PATH="$TRAVIS_BUILD_DIR/../edison_travis"
+
+    # Add executables into PATH.
+    - PATH="$PATH:$COMPOSER_VENDOR_PATH/bin"
+    - PATH="$PATH:$EDISON_TRAVIS_PATH/bin"
+
+before_install:
+  # Clone edison_travis.
+  - git clone --depth 1 git@github.com:pfizer/edison_travis-8.git --branch 4.x "$EDISON_TRAVIS_PATH"
+
+  - chmod +x "$EDISON_TRAVIS_PATH/bin" -R
+
+  # Load Variables.
+  - source "$EDISON_TRAVIS_PATH/environment.vars"
+
+  - edison-travis before_install
+
+install:
+  - edison-travis install
+
+before_script:
+  - edison-travis before_script
+
+script:
+  - edison-travis script
+
+after_script:
+  - edison-travis after_script

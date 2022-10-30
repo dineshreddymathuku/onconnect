@@ -1,0 +1,6 @@
+primary_menu_main:
+  js:
+    js/primary-menu.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal

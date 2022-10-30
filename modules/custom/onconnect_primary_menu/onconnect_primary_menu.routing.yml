@@ -1,0 +1,6 @@
+onconnect_custom.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::home'
+  requirements:
+    _access: 'TRUE'

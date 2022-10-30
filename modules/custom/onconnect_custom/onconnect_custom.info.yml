@@ -1,0 +1,5 @@
+name: Oncology Custom
+type: module
+description: 'Custom development for oncology.'
+package: Custom
+core_version_requirement: ^8.8 || ^9

@@ -1,0 +1,175 @@
+<section class="metrics-db">
+  <div class="metrics-container" id="metrics-dashboard-data">
+    <div class="row">
+      <div class="tooltip-outer">
+        <h3 class="metrics-heading">Metrics Dashboard</h3>
+        <span class="img-container">
+          <img alt="info" class="small-info-icon"
+               src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/info-small.svg"/><span
+            class="matrics-tooltip">{{ data.hover_dashboard }}</span></span>
+      </div>
+      <div class="view-all-metrics">
+        <div class="view-all viewall-metrics">View all metrics<span>
+            <img alt="info"
+                 src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon-blue.svg"/></span>
+        </div>
+      </div>
+    </div>
+    <div class="metrics-carsd">
+      <div class="metrics-outter">
+        <div class="metrics-inside">
+          <img alt="publication" src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/book.svg"/>
+          <div class="metrics-content">
+            <span class="metrics-text">Abstracts submitted</span>
+            <span class="metrics-numbers">{{ data.publication_metrics_abstracts_submitted }}</span>
+          </div>
+          <div class="clearfix view-all-popup"><span data-id="publication-metrics-title" class="view-more-text">View more </span>
+            <span class="metrics-icon"> <img alt="right-icon" class="metrics-right-icon"
+                                             src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon.svg"/></span>
+          </div>
+        </div>
+      </div>
+      <div class="metrics-outter">
+        <div class="metrics-inside"><img alt="share-icon"
+                                         src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/share.svg"/>
+          <div class="metrics-content">
+            <span class="metrics-text">Twitter followers</span>
+            <span class="metrics-numbers">{{ data.social_media_metrics_no_followers }}</span>
+          </div>
+          <div class="clearfix view-all-popup"><span data-id="social-media-metrics-title" class="view-more-text">View more </span>
+            <span class="metrics-icon"> <img alt="right-icon" class="metrics-right-icon"
+                                             src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon.svg"/></span>
+          </div>
+        </div>
+      </div>
+      <div class="metrics-outter">
+        <div class="metrics-inside"><img alt="platform-icon"
+                                         src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/platform.svg"/>
+          <div class="metrics-content">
+            <span class="metrics-text">QxMD articles launched</span>
+            <span class="metrics-numbers">{{ data.closed_platform_metrics_qmd_total_articles }}</span>
+          </div>
+          <div class="clearfix view-all-popup"><span data-id="closed-platform-metrics-title" class="view-more-text">View more </span>
+            <span class="metrics-icon"> <img alt="right-icon" class="metrics-right-icon"
+                                             src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon.svg"/></span>
+          </div>
+        </div>
+      </div>
+      <div class="metrics-outter">
+        <div class="metrics-inside">
+          <img alt="calender-icon"
+               src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/congress.svg"/>
+          <div class="metrics-content">
+            <span class="metrics-text">Total Congress Exhibits</span>
+            <span class="metrics-numbers">{{ data.congress_presence_total_congress_exhibits }}</span>
+          </div>
+          <div class="clearfix view-all-popup"><span data-id="congress-metrics-title"
+                                                     class="view-more-text">View more </span> <span
+              class="metrics-icon"> <img alt="right-icon" class="metrics-right-icon"
+                                         src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon.svg"/></span>
+          </div>
+        </div>
+      </div>
+      <div id="view-all-mobile">View all metrics<span>
+            <img alt="info"
+                 src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/right-icon-blue.svg"/></span>
+        </div>
+    </div>
+  </div>
+</section>
+<div class="metrics-popup-container">
+  <div class="metrics-popup">
+    <div class="metrics-popup-heading">
+      <div>
+        <h5>Metrics Dashboard</h5>
+        <span class="img-container"><img alt="info" class="small-info-icon"
+                                         src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/info-small.svg"/><span
+            class="matrics-tooltip">{{ data.hover_dashboard }}</span></span>
+      </div>
+      <span class="close-metrics"><img alt="close-icon" class="close-icon"
+                                       src="/profiles/pfeconconnectpfcom_profile/themes/onconnect/images/icons/filter-close.svg"/></span>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="active"><a data-toggle="tab" href="#publication-metrics" id="publication-metrics-title" role="tab">Publication
+          Metrics</a></li>
+      <li><a data-toggle="tab" href="#social-media-metrics" id="social-media-metrics-title" role="tab">Social Media
+          metrics</a></li>
+      <li><a data-toggle="tab" href="#closed-platform-metrics" id="closed-platform-metrics-title" role="tab">Closed
+          Platform Metrics </a></li>
+      <li><a data-toggle="tab" href="#congress-metrics" id="congress-metrics-title" role="tab">Congress Metrics</a>
+      </li>
+    </ul>
+    <!-- Tab panes -->
+
+    <div class="tab-content">
+      <div class="tab-pane active row" id="publication-metrics">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Abstracts submitted</span> <span
+              class="metrics-value">{{ data.publication_metrics_abstracts_submitted }}</span></div>
+	  <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Manuscripts submitted</span> <span
+              class="metrics-value">{{ data.publication_metrics_manuscripts_submitted }}</span></div>
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Manuscripts published</span> <span
+              class="metrics-value">{{ data.publication_metrics_manuscripts_published }}</span></div>
+          
+        </div>
+        <div class="row metrics-secondblock">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Poster presentations</span> <span
+              class="metrics-value">{{ data.publication_metrics_posted_presentations }}</span></div>
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Oral presentations</span> <span
+              class="metrics-value">{{ data.publication_metrics_oral_presentations }}</span></div>
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Plain Language Summaries</span> <span
+              class="metrics-value">{{ data.publication_metrics_plain_language_summaries }}</span></div>
+        </div>
+      </div>
+
+      <div class="tab-pane row" id="social-media-metrics">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Number of Followers</span> <span
+              class="metrics-value">{{ data.social_media_metrics_no_followers }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Number of tweets</span> <span
+              class="metrics-value">{{ data.social_media_metrics_no_tweets }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Total cumulative reach</span> <span
+              class="metrics-value">{{ data.social_media_metrics_total_cumulative_reach }}</span></div>
+        </div>
+      </div>
+
+      <div class="tab-pane row" id="closed-platform-metrics">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">QxMD Total articles</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_qmd_total_articles }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">QxMD Total readership views</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_qmd_total_readership_views }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">QxMD Fold-increase</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_qmd_fold_increase }}</span></div>
+        </div>
+
+        <div class="row metrics-secondblock">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">TrendMD Total articles</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_trendmd_total_articles }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">TrendMD Total impressions</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_trendmd_total_impressions }}</span></div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">TrendMD Total views</span> <span
+              class="metrics-value">{{ data.closed_platform_metrics_trendmd_total_views }}</span></div>
+        </div>
+      </div>
+      <div class="tab-pane row" id="congress-metrics">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Total Congress Exhibits</span> <span
+              class="metrics-value">{{ data.congress_presence_total_congress_exhibits }}</span></div>
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Total Congress Exhibit Visitors</span>
+            <span
+              class="metrics-value">{{ data.congress_presence_total_congress_exhibit_visitors }}</span></div>
+          <div class="col-lg-4 col-md-4 col-sm-12"><span class="metrics-title">Symposia</span> <span
+              class="metrics-value">{{ data.congress_presence_symposia }}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

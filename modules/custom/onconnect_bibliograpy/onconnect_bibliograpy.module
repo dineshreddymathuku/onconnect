@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Bibiliograpy module.
+ */
+
+/**
+ * Implements to check publication added to Bibliograpy.
+ */
+function check_bibliograpy($nid) {
+  $uid = \Drupal::currentUser()->id();
+  $bibliograpy = \Drupal::database()->select("bibliograpy", "bi")
+    ->fields("bi", ["nid"])
+    ->condition("uid", $uid)
+    ->condition("nid", $nid)
+    ->execute()
+    ->fetchObject();
+  if ($bibliograpy) {
+    return [
+      'link' => "/remove/bibliograpy/$nid",
+      'title' => "Remove from bibliography",
+      'class' => "bibliograpy-links-remove",
+    ];
+  }
+  return [
+    'link' => "/add/bibliograpy/$nid",
+    'title' => "Add to bibliography",
+    'class' => "bibliograpy-links-add",
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function onconnect_bibliograpy_views_data() {
+  $data = [];
+  // Base data.
+  $data['bibliograpy']['table']['group'] = t('Bibliograpy');
+  $data['bibliograpy']['table']['base'] = [
+    'title' => t('Bibliograpy'),
+    'help' => t('Publications Added.'),
+  ];
+  // Fields.
+  $data['bibliograpy']['nid'] = [
+    'title' => t('Node ID'),
+    'help' => t('Publication Id.'),
+    'field' => [
+      'id' => 'standard',
+    ],
+    'relationship' => [
+      'title' => t('Publication Node'),
+      'label' => t('Publication Node'),
+      'group' => 'Bibliograpy',
+      'id' => 'standard',
+      'base' => 'node_field_data',
+      'base field' => 'nid',
+      'field' => 'nid',
+      'relationship field' => 'nid',
+    ],
+  ];
+  $data['bibliograpy']['uid'] = [
+    'title' => t('User ID'),
+    'help' => t('User ID added publication'),
+    'field' => [
+      'id' => 'standard',
+    ],
+  ];
+  return $data;
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function onconnect_bibliograpy_page_attachments(array &$attachments) {
+
+  $attachments['#attached']['library'][] = 'onconnect_bibliograpy/bibliograpy';
+
+}

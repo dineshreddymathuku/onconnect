@@ -1,0 +1,133 @@
+onconnect_custom.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::home'
+  requirements:
+    _access: 'TRUE'
+
+onconnect_custom.other_disease_areas:
+  path: '/disease-areas/other-indications'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::home'
+    _title: 'Other Indications'
+  requirements:
+    _permission: 'access content'
+
+onconnect_custom.other_congresses:
+  path: '/congresses/other-congresses'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::home'
+    _title: 'Other Congresses'
+  requirements:
+    _permission: 'access content'
+
+onconnect_custom.download_s3:
+  path: '/download/file/{fid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::downloadS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.fileParagraphdownload_s3:
+  path: '/download/data/file/{pid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::downloadParagraphS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.file_download_s3:
+  path: '/file/download/{nid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::filedownloadS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.view_file_s3:
+  path: '/view/file/{fid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::downloadS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.view_file_link_s3:
+  path: '/view/file/link/{nid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::viewDocumentS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.platform_download:
+  path: '/platform/download/{nid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::platformDownload'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.pillar_download:
+  path: '/pillar/download/{nid}/{pid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::pillarDownload'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.image_s3:
+  path: '/image/view/{fid}'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\CustomController::viewImageS3'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
+
+onconnect_custom.call_ajax:
+  path: '/custom_ajax_link'
+  defaults:
+    _controller: '\Drupal\onconnect_custom\Controller\AjaxController::callAjax'
+  requirements:
+    _access: 'TRUE'
+
+onconnect_custom.global_settings:
+  path: '/admin/config/onconnect/global-settings'
+  defaults:
+    _form: '\Drupal\onconnect_custom\Form\GlobalSettingsForm'
+    _title: 'Onconnect Global Configuration'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_custom.metrics_dashboard:
+  path: '/admin/config/onconnect/metrics-dashboard'
+  defaults:
+    _form: '\Drupal\onconnect_custom\Form\MetricsDashboardForm'
+    _title: 'Metrics Data'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_custom.global:
+  path: '/admin/config/onconnect'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Global settings'
+  requirements:
+    _permission: 'administer onconnect import'
+
+onconnect_custom.publication_concept:
+  path: '/publication_concept/form'
+  defaults:
+    _form: '\Drupal\onconnect_custom\Form\PublicationConceptForm'
+    _title: 'Publication Concept Submission Form'
+  requirements:
+    _permission: 'access content'

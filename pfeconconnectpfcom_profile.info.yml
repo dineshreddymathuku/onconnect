@@ -1,0 +1,32 @@
+name: pfeconconnectpfcom Profile
+type: profile
+description: 'Default Site Profile for pfeconconnectpfcom project'
+'interface translation project': pfeconconnectpfcom_profile
+'interface translation server pattern': profiles/pfeconconnectpfcom_profile/translations/%language.po
+core_version_requirement: ^9
+distribution:
+  name: Pfizer Distribution
+dependencies:
+  - drupal:block
+  - drupal:block_content
+  - drupal:breakpoint
+  - drupal:ckeditor
+  - drupal:config
+  - drupal:contextual
+  - drupal:datetime
+  - drupal:dynamic_page_cache
+  - drupal:editor
+  - drupal:file
+  - drupal:help
+  - drupal:image
+  - drupal:node
+  - drupal:options
+  - drupal:page_cache
+  - drupal:path
+  - drupal:quickedit
+  - drupal:toolbar
+  - drupal:views
+themes:
+  - bartik
+  - seven
+config_install: true
